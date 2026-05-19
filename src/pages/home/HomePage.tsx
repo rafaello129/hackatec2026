@@ -35,7 +35,7 @@ export default function HomePage() {
     <div className="w-full max-w-full space-y-5 overflow-hidden">
       <PageIntro
         title="Panel del intermediario"
-        description="Administra negocios representados, pedidos, inventario y liquidaciones desde una sola operacion."
+        description="Administra negocios aliados, pedidos, inventario y liquidaciones desde una sola operacion."
         actions={
           <>
             <Link
@@ -80,7 +80,7 @@ export default function HomePage() {
             <div className="mb-3 flex items-center justify-between gap-2">
               <h2 className="font-['Hanken_Grotesk'] text-lg font-semibold text-[#1a1c18]">Accesos rapidos</h2>
               <span className="rounded-full bg-[#D6D979] px-2.5 py-1 text-xs font-semibold text-[#3E5902]">
-                Operacion proxy
+                Operacion Intermediario
               </span>
             </div>
             <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">

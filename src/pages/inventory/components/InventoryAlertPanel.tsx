@@ -10,9 +10,10 @@ const severityMap: Record<InventoryAlert["severity"], { label: string; tone: str
 interface InventoryAlertPanelProps {
   alerts: InventoryAlert[];
   resolveItemName: (itemId: string) => string;
+  resolveItemBusiness?: (itemId: string) => string;
 }
 
-export default function InventoryAlertPanel({ alerts, resolveItemName }: InventoryAlertPanelProps) {
+export default function InventoryAlertPanel({ alerts, resolveItemName, resolveItemBusiness }: InventoryAlertPanelProps) {
   return (
     <section className="rounded-lg border border-[#c2c9bc] bg-white p-4">
       <div className="mb-3 flex items-center justify-between gap-2">
@@ -34,7 +35,10 @@ export default function InventoryAlertPanel({ alerts, resolveItemName }: Invento
                   </span>
                   <div>
                     <p className="text-sm font-semibold text-[#1a1c18]">{alert.title}</p>
-                    <p className="text-xs text-[#42493f]">{resolveItemName(alert.itemId)}</p>
+                    <p className="text-xs text-[#42493f]">
+                      {resolveItemBusiness ? `${resolveItemBusiness(alert.itemId)} - ` : ""}
+                      {resolveItemName(alert.itemId)}
+                    </p>
                   </div>
                 </div>
                 <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${mapped.tone}`}>

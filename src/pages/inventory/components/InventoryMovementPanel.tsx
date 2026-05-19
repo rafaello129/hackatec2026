@@ -21,13 +21,14 @@ const formatDate = (dateISO: string) =>
 interface InventoryMovementPanelProps {
   movements: StockMovement[];
   resolveItemName: (itemId: string) => string;
+  resolveItemBusiness?: (itemId: string) => string;
 }
 
-export default function InventoryMovementPanel({ movements, resolveItemName }: InventoryMovementPanelProps) {
+export default function InventoryMovementPanel({ movements, resolveItemName, resolveItemBusiness }: InventoryMovementPanelProps) {
   return (
     <section className="rounded-lg border border-[#c2c9bc] bg-white p-4">
       <div className="mb-3 flex items-center justify-between">
-        <h3 className="font-['Hanken_Grotesk'] text-lg font-semibold text-[#1a1c18]">Activity Log</h3>
+        <h3 className="font-['Hanken_Grotesk'] text-lg font-semibold text-[#1a1c18]">Actividad reciente</h3>
         <span className="rounded-full bg-[#e8e9e2] px-2.5 py-1 text-xs font-semibold text-[#42493f]">{movements.length}</span>
       </div>
 
@@ -44,7 +45,10 @@ export default function InventoryMovementPanel({ movements, resolveItemName }: I
                   </span>
                   <div>
                     <p className="line-clamp-1 text-sm font-semibold text-[#1a1c18]">{resolveItemName(movement.itemId)}</p>
-                    <p className="text-xs text-[#42493f]">{mapped.label}</p>
+                    <p className="text-xs text-[#42493f]">
+                      {mapped.label}
+                      {resolveItemBusiness ? ` - ${resolveItemBusiness(movement.itemId)}` : ""}
+                    </p>
                   </div>
                 </div>
                 <span className="text-sm font-semibold text-[#1a1c18]">

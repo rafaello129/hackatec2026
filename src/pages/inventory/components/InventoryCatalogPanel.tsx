@@ -19,10 +19,17 @@ const availabilityMap: Record<CatalogItem["availabilityStatus"], { label: string
 const useCaseLabels: Record<CatalogItem["cooperativeUseCase"], string> = {
   compra_conjunta: "Compra conjunta",
   venta_conjunta: "Venta conjunta",
-  campana_compartida: "Campaña compartida",
-  reparticion_bienes: "Repartición",
+  campana_compartida: "Campana compartida",
+  reparticion_bienes: "Reparticion",
   soporte_post_acuerdo: "Post-acuerdo",
   no_aplica: "No aplica",
+};
+
+const marketplaceMap: Record<CatalogItem["marketplaceStatus"], string> = {
+  listed: "Marketplace",
+  not_listed: "No listado",
+  paused: "Pausado",
+  pending_review: "Revision",
 };
 
 const formatCurrency = (value: number) =>
@@ -40,7 +47,7 @@ export default function InventoryCatalogPanel({ catalogItems }: InventoryCatalog
   return (
     <section className="rounded-lg border border-[#c2c9bc] bg-white p-4">
       <div className="mb-3 flex items-center justify-between">
-        <h3 className="font-['Hanken_Grotesk'] text-lg font-semibold text-[#1a1c18]">Catálogo comercial</h3>
+        <h3 className="font-['Hanken_Grotesk'] text-lg font-semibold text-[#1a1c18]">Catalogo comercial</h3>
         <span className="rounded-full bg-[#e8e9e2] px-2.5 py-1 text-xs font-semibold text-[#42493f]">{catalogItems.length} items</span>
       </div>
 
@@ -56,7 +63,7 @@ export default function InventoryCatalogPanel({ catalogItems }: InventoryCatalog
                   </span>
                   <div className="min-w-0">
                     <p className="truncate text-sm font-semibold text-[#1a1c18]">{item.name}</p>
-                    <p className="text-xs text-[#42493f]">{categoryLabels[item.category]}</p>
+                    <p className="truncate text-xs text-[#42493f]">{item.businessName}</p>
                   </div>
                 </div>
                 <span className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold ${availability.className}`}>
@@ -65,6 +72,9 @@ export default function InventoryCatalogPanel({ catalogItems }: InventoryCatalog
               </div>
               <p className="text-sm font-semibold text-[#1a1c18]">
                 {formatCurrency(item.estimatedPrice)} <span className="text-xs font-normal text-[#42493f]">/ {item.unit}</span>
+              </p>
+              <p className="text-xs text-[#42493f]">
+                {categoryLabels[item.category]} - Comision {item.commissionRate}% - {marketplaceMap[item.marketplaceStatus]}
               </p>
 
               <div className="mt-2 flex flex-wrap gap-1.5">
@@ -85,6 +95,11 @@ export default function InventoryCatalogPanel({ catalogItems }: InventoryCatalog
                 {item.bulkPurchaseEligible ? (
                   <span className="rounded-full bg-white px-2 py-0.5 text-xs font-semibold text-[#42493f]">
                     Bulk {item.minimumBulkQuantity}
+                  </span>
+                ) : null}
+                {item.payoutPending > 0 ? (
+                  <span className="rounded-full bg-[#fff2cc] px-2 py-0.5 text-xs font-semibold text-[#7a5d00]">
+                    Liquidacion pendiente
                   </span>
                 ) : null}
               </div>

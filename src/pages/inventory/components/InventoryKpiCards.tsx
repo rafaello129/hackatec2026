@@ -1,4 +1,4 @@
-import { AlertTriangle, Boxes, CircleDollarSign, RefreshCcw } from "lucide-react";
+import { AlertTriangle, Boxes, CircleDollarSign, RefreshCcw, Store } from "lucide-react";
 import type { InventoryKpi } from "@/types/inventory.types";
 
 const iconMap: Record<InventoryKpi["id"], typeof Boxes> = {
@@ -6,6 +6,8 @@ const iconMap: Record<InventoryKpi["id"], typeof Boxes> = {
   low_stock: AlertTriangle,
   estimated_value: CircleDollarSign,
   recent_movements: RefreshCcw,
+  marketplace_listed: Store,
+  pending_payouts: CircleDollarSign,
 };
 
 interface InventoryKpiCardsProps {

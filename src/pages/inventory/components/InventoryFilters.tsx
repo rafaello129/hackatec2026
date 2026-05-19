@@ -40,7 +40,7 @@ export default function InventoryFilters({
           <input
             type="text"
             value={searchText}
-            placeholder="Buscar por producto, SKU, proveedor o tag"
+            placeholder="Buscar por producto, SKU, negocio, proveedor o tag"
             onChange={(event) => onSearchChange(event.target.value)}
             className="h-10 w-full rounded-lg border border-[#c2c9bc] bg-white pl-9 pr-3 text-sm text-[#1a1c18] outline-none transition focus:border-[#4F7302] focus:ring-2 focus:ring-[#4F7302]/20"
           />
@@ -82,7 +82,7 @@ export default function InventoryFilters({
 
       <p className="inline-flex items-center gap-2 text-xs text-[#42493f]">
         <Filter className="h-3.5 w-3.5" />
-        Filtra stock para priorizar reposiciones y oportunidades de compra conjunta.
+        Filtra stock por negocio, estado y categoria para priorizar reposicion, marketplace y liquidaciones.
       </p>
     </div>
   );

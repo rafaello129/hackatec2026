@@ -2,6 +2,7 @@ import { Plus } from "lucide-react";
 import PageIntro from "@/components/common/PageIntro";
 import SectionCard from "@/components/common/SectionCard";
 import InventoryAlertPanel from "./components/InventoryAlertPanel";
+import InventoryBusinessTabs from "./components/InventoryBusinessTabs";
 import InventoryCatalogPanel from "./components/InventoryCatalogPanel";
 import InventoryDetailPanel from "./components/InventoryDetailPanel";
 import InventoryFilters from "./components/InventoryFilters";
@@ -16,11 +17,14 @@ export default function InventoryPage() {
     items,
     filteredItems,
     kpis,
-    alerts,
+    filteredAlerts,
     recentMovements,
-    catalogItems,
+    filteredCatalogItems,
+    businesses,
     searchText,
     setSearchText,
+    businessFilter,
+    setBusinessFilter,
     statusFilter,
     setStatusFilter,
     categoryFilter,
@@ -35,12 +39,13 @@ export default function InventoryPage() {
   } = useInventory();
 
   const resolveItemName = (itemId: string) => items.find((item) => item.id === itemId)?.name ?? "Item no identificado";
+  const resolveItemBusiness = (itemId: string) => items.find((item) => item.id === itemId)?.businessName ?? "Negocio no identificado";
 
   return (
     <div className="w-full max-w-full space-y-5 overflow-hidden">
       <PageIntro
         title="Inventario"
-        description="Controla stock, alertas operativas y catalogo comercial para la operacion diaria."
+        description="Administra productos, stock y catalogo comercial de los negocios intermediados."
         actions={
           <button
             type="button"
@@ -55,9 +60,15 @@ export default function InventoryPage() {
 
       <InventoryKpiCards kpis={kpis} />
 
+      <InventoryBusinessTabs
+        businesses={businesses}
+        activeBusinessId={businessFilter}
+        onBusinessChange={setBusinessFilter}
+      />
+
       <div className="grid w-full max-w-full gap-4 xl:grid-cols-[minmax(0,1fr)_320px] xl:items-start">
         <div className="min-w-0">
-        <SectionCard title="Stock operativo">
+        <SectionCard title="Stock por negocio">
           <div className="space-y-3">
             <InventoryFilters
               searchText={searchText}
@@ -85,7 +96,7 @@ export default function InventoryPage() {
           </div>
 
           <p className="mt-3 text-sm text-[#42493f]">
-            Mostrando {filteredItems.length} de {items.length} items del inventario operativo.
+            Mostrando {filteredItems.length} de {items.length} items del inventario intermediado.
           </p>
         </SectionCard>
         </div>
@@ -114,23 +125,33 @@ export default function InventoryPage() {
               ))}
             </div>
             <div className="mt-3 grid grid-cols-7 gap-1 text-center text-xs font-semibold text-[#42493f]">
-              {['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].map((day) => (
+              {["LUN", "MAR", "MIE", "JUE", "VIE", "SAB", "DOM"].map((day) => (
                 <span key={day}>{day}</span>
               ))}
             </div>
-            <p className="mt-3 text-sm text-[#4F7302]">Movement trend is up by 8.4% this week due to Q4 restocking cycles.</p>
+            <p className="mt-3 text-sm text-[#4F7302]">
+              La rotacion subio 8.4% por pedidos activos de negocios representados.
+            </p>
           </div>
 
-          <InventoryMovementPanel movements={recentMovements} resolveItemName={resolveItemName} />
+          <InventoryMovementPanel
+            movements={recentMovements}
+            resolveItemName={resolveItemName}
+            resolveItemBusiness={resolveItemBusiness}
+          />
         </aside>
       </div>
 
       <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] xl:items-start">
-        <InventoryAlertPanel alerts={alerts} resolveItemName={resolveItemName} />
+        <InventoryAlertPanel
+          alerts={filteredAlerts}
+          resolveItemName={resolveItemName}
+          resolveItemBusiness={resolveItemBusiness}
+        />
         <InventoryDetailPanel item={selectedItem} movements={selectedItemMovements} />
       </div>
 
-      <InventoryCatalogPanel catalogItems={catalogItems} />
+      <InventoryCatalogPanel catalogItems={filteredCatalogItems} />
     </div>
   );
 }

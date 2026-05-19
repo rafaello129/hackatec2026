@@ -21,6 +21,14 @@ export type CooperativeUseCase =
   | "soporte_post_acuerdo"
   | "no_aplica";
 
+export type InventoryBusinessFilter = string | "all";
+
+export type MarketplaceListingStatus =
+  | "listed"
+  | "not_listed"
+  | "paused"
+  | "pending_review";
+
 export interface InventoryItem {
   id: string;
   name: string;
@@ -33,11 +41,21 @@ export interface InventoryItem {
   maxStock: number;
   status: InventoryStatus;
   estimatedValue: number;
+  businessId: string;
+  businessName: string;
+  ownerName: string;
   supplier: string;
   preferredSupplier: string;
   location: string;
   lastUpdated: string;
   tags: string[];
+  commissionEligible: boolean;
+  commissionRate: number;
+  listedInMarketplace: boolean;
+  marketplaceStatus: MarketplaceListingStatus;
+  payoutPending: number;
+  pendingOrders: number;
+  lastOrderDate: string | null;
   availableForCooperative: boolean;
   cooperativeUseCase: CooperativeUseCase;
   bulkPurchaseEligible: boolean;
@@ -64,7 +82,13 @@ export interface InventoryAlert {
 }
 
 export interface InventoryKpi {
-  id: "total_sku" | "low_stock" | "estimated_value" | "recent_movements";
+  id:
+    | "total_sku"
+    | "low_stock"
+    | "estimated_value"
+    | "recent_movements"
+    | "marketplace_listed"
+    | "pending_payouts";
   label: string;
   value: number;
   formattedValue: string;
@@ -80,6 +104,11 @@ export interface CatalogItem {
   availabilityStatus: "available" | "limited" | "on_demand";
   estimatedPrice: number;
   unit: string;
+  businessId: string;
+  businessName: string;
+  commissionRate: number;
+  marketplaceStatus: MarketplaceListingStatus;
+  payoutPending: number;
   availableForCooperative: boolean;
   cooperativeUseCase: CooperativeUseCase;
   bulkPurchaseEligible: boolean;

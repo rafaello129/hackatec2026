@@ -4,7 +4,8 @@ import { NavLink, Outlet, useLocation } from "react-router-dom";
 import {
   Bell,
   Bot,
-  Handshake,
+  BriefcaseBusiness,
+  ClipboardList,
   House,
   LayoutGrid,
   LifeBuoy,
@@ -12,7 +13,6 @@ import {
   Package,
   Search,
   Settings,
-  Users,
   X,
 } from "lucide-react";
 
@@ -24,9 +24,9 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   { to: "/", label: "Home", icon: House },
-  { to: "/customers", label: "Clientes", icon: Users },
+  { to: "/businesses", label: "Negocios", icon: BriefcaseBusiness },
   { to: "/inventory", label: "Inventario", icon: Package },
-  { to: "/cooperatives", label: "Cooperativos", icon: Handshake },
+  { to: "/orders", label: "Pedidos", icon: ClipboardList },
   { to: "/finance", label: "Finanzas", icon: LayoutGrid },
   { to: "/ai-assistant", label: "Asistente IA", icon: Bot },
 ];

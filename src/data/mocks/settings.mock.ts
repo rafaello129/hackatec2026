@@ -13,7 +13,7 @@ export const businessProfileMock: BusinessProfile = {
   website: "peek-organic.com",
   description:
     "Plataforma empresarial para coordinar clientes, inventario, finanzas y oportunidades cooperativas entre negocios aliados.",
-  logoUrl: "/Vector.svg",
+  logoUrl: `${import.meta.env.BASE_URL}Vector.svg`,
   logoAlt: "Logo de péek Organic Enterprise",
 };
 

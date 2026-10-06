@@ -5,6 +5,7 @@
   import tailwindcss from "@tailwindcss/vite";
 
   export default defineConfig({
+    base: '/hackatec2026/',
     plugins: [react(),     tailwindcss(),], 
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],

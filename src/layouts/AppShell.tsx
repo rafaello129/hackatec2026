@@ -73,7 +73,7 @@ function SidebarContent({ closeMobile }: { closeMobile?: () => void }) {
         <div className="flex items-center gap-3">
           <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[#D6D979]/35 bg-[#0f3a0f]">
             <span className="block h-7 w-7 overflow-hidden">
-              <img src="/Vector.svg" alt="péek" className="h-full w-auto max-w-none" />
+              <img src={`${import.meta.env.BASE_URL}Vector.svg`} alt="péek" className="h-full w-auto max-w-none" />
             </span>
           </span>
           <div>

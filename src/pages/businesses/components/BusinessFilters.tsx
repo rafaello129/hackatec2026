@@ -31,13 +31,13 @@ export default function BusinessFilters({
         <input
           value={searchText}
           onChange={(event) => onSearchTextChange(event.target.value)}
-          placeholder="Buscar por negocio, propietario, ubicación o etiqueta..."
+          placeholder="Buscar por emprendimiento, propietario, ubicación o etiqueta..."
           className="h-11 w-full rounded-full border border-transparent bg-[#F6F7F2] pl-11 pr-4 text-[12px] text-[#263129] outline-none transition placeholder:text-[#89938C] focus:border-[#CAD7C5] focus:bg-white focus:ring-2 focus:ring-[#9AC84B]/15"
         />
       </label>
 
       <div className="mt-4 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-        <div className="flex flex-wrap gap-2" aria-label="Filtrar negocios por estado">
+        <div className="flex flex-wrap gap-2" aria-label="Filtrar emprendimientos por estado">
           {statusOptions.map((option) => {
             const active = statusFilter === option.value;
             const shortLabel =

@@ -35,10 +35,10 @@ export default function BusinessesPage() {
       <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="font-['Hanken_Grotesk'] text-[34px] font-bold leading-none text-[#172019]">
-            Negocios
+            Emprendimientos
           </h1>
           <p className="mt-2 text-[13px] text-[#657068]">
-            Administra los negocios que representas y revisa su operación reciente.
+            Administra los emprendimientos que representas y revisa su operación reciente.
           </p>
         </div>
 
@@ -48,7 +48,7 @@ export default function BusinessesPage() {
           className="inline-flex h-11 w-fit cursor-not-allowed items-center justify-center gap-2 rounded-full bg-[#073B1E] px-5 text-[12px] font-semibold text-white opacity-80"
         >
           <Plus className="h-4 w-4" />
-          Agregar negocio
+          Agregar emprendimiento
         </button>
       </header>
 
@@ -78,9 +78,9 @@ export default function BusinessesPage() {
             <section className="rounded-[24px] border border-[#E1E6DE] bg-white p-5 transition-shadow duration-300 hover:shadow-[0_16px_42px_rgba(23,35,27,0.05)] sm:p-6">
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <h2 className="text-[17px] font-semibold text-[#172019]">Tus negocios</h2>
+                  <h2 className="text-[17px] font-semibold text-[#172019]">Tus emprendimientos</h2>
                   <p className="mt-1 text-[11px] text-[#7B867E]">
-                    {filteredBusinesses.length} {filteredBusinesses.length === 1 ? "negocio" : "negocios"}
+                    {filteredBusinesses.length} {filteredBusinesses.length === 1 ? "emprendimiento" : "emprendimientos"}
                   </p>
                 </div>
               </div>

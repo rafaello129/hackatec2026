@@ -28,7 +28,7 @@ export default function BusinessOnboardingPanel({ tasks }: { tasks: BusinessOnbo
       <div className="mt-4 divide-y divide-[#EEF0EB]">
         {visible.length === 0 ? (
           <div className="rounded-2xl bg-[#F6F8F3] px-3 py-4 text-[11px] text-[#66736A]">
-            No hay tareas pendientes para este negocio.
+            No hay tareas pendientes para este emprendimiento.
           </div>
         ) : (
           visible.map((task) => (

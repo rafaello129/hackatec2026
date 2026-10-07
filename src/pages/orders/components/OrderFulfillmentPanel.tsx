@@ -7,7 +7,7 @@ const deliveryLabels: Record<Order["deliveryMethod"], string> = {
   local_delivery: "Entrega local",
   third_party: "Tercero",
   shared_route: "Ruta compartida",
-  seller_delivery: "Entrega del negocio",
+  seller_delivery: "Entrega del emprendimiento",
 };
 
 function nextAction(order: Order) {

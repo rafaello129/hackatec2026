@@ -35,9 +35,9 @@ export const ordersMock: Order[] = [
     customerName: "Hotel Centro Maya",
     customerPhone: "+52 998 220 5104",
     businessId: "biz-005",
-    businessName: "BioPack Península",
+    businessName: "EcoEmpaque Caribe",
     items: [
-      { id: "item-003", productName: "Empaque biocompostable 1kg", sku: "BP-BIO-114", quantity: 400, unitPrice: 22, subtotal: 8800, businessId: "biz-005", businessName: "BioPack Península" },
+      { id: "item-003", productName: "Empaque biocompostable 1kg", sku: "BP-BIO-114", quantity: 400, unitPrice: 22, subtotal: 8800, businessId: "biz-005", businessName: "EcoEmpaque Caribe" },
     ],
     total: 8800,
     commission: 968,
@@ -60,10 +60,10 @@ export const ordersMock: Order[] = [
     customerName: "Valeria Torres",
     customerPhone: "+52 55 3092 7741",
     businessId: "biz-002",
-    businessName: "Boutique Roma",
+    businessName: "Moda Artesanal Ixchel",
     items: [
-      { id: "item-004", productName: "Vestido lino primavera", sku: "BR-VES-LIN-02", quantity: 2, unitPrice: 980, subtotal: 1960, businessId: "biz-002", businessName: "Boutique Roma" },
-      { id: "item-005", productName: "Bolsa tote artesanal", sku: "BR-TOTE-11", quantity: 1, unitPrice: 760, subtotal: 760, businessId: "biz-002", businessName: "Boutique Roma" },
+      { id: "item-004", productName: "Vestido lino primavera", sku: "BR-VES-LIN-02", quantity: 2, unitPrice: 980, subtotal: 1960, businessId: "biz-002", businessName: "Moda Artesanal Ixchel" },
+      { id: "item-005", productName: "Bolsa tote artesanal", sku: "BR-TOTE-11", quantity: 1, unitPrice: 760, subtotal: 760, businessId: "biz-002", businessName: "Moda Artesanal Ixchel" },
     ],
     total: 2720,
     commission: 408,
@@ -86,9 +86,9 @@ export const ordersMock: Order[] = [
     customerName: "Mercados del Sur",
     customerPhone: "+52 81 4401 8920",
     businessId: "biz-004",
-    businessName: "AgroNorte Distribution",
+    businessName: "Milpa del Caribe",
     items: [
-      { id: "item-006", productName: "Concentrado frutal regional", sku: "AN-CF-019", quantity: 38, unitPrice: 376, subtotal: 14288, businessId: "biz-004", businessName: "AgroNorte Distribution" },
+      { id: "item-006", productName: "Concentrado frutal regional", sku: "AN-CF-019", quantity: 38, unitPrice: 376, subtotal: 14288, businessId: "biz-004", businessName: "Milpa del Caribe" },
     ],
     total: 14288,
     commission: 1286,
@@ -111,9 +111,9 @@ export const ordersMock: Order[] = [
     customerName: "Taller Uniforma",
     customerPhone: "+52 477 900 1180",
     businessId: "biz-003",
-    businessName: "Textiles León",
+    businessName: "Textiles del Mayab",
     items: [
-      { id: "item-007", productName: "Denim indigo 12oz", sku: "TL-DEN-12", quantity: 12, unitPrice: 1650, subtotal: 19800, businessId: "biz-003", businessName: "Textiles León" },
+      { id: "item-007", productName: "Denim indigo 12oz", sku: "TL-DEN-12", quantity: 12, unitPrice: 1650, subtotal: 19800, businessId: "biz-003", businessName: "Textiles del Mayab" },
     ],
     total: 19800,
     commission: 1980,
@@ -136,9 +136,9 @@ export const ordersMock: Order[] = [
     customerName: "Express Closet",
     customerPhone: "+52 55 7710 2040",
     businessId: "biz-006",
-    businessName: "Ruta Boutique MX",
+    businessName: "Ruta Comunitaria Maya",
     items: [
-      { id: "item-008", productName: "Servicio entrega boutique", sku: "RB-DEL-01", quantity: 14, unitPrice: 95, subtotal: 1330, businessId: "biz-006", businessName: "Ruta Boutique MX" },
+      { id: "item-008", productName: "Servicio entrega boutique", sku: "RB-DEL-01", quantity: 14, unitPrice: 95, subtotal: 1330, businessId: "biz-006", businessName: "Ruta Comunitaria Maya" },
     ],
     total: 1330,
     commission: 106,
@@ -161,9 +161,9 @@ export const ordersMock: Order[] = [
     customerName: "Lino Club",
     customerPhone: "+52 33 5012 8890",
     businessId: "biz-007",
-    businessName: "Nativa Beauty Supply",
+    businessName: "Herbolaria Nativa",
     items: [
-      { id: "item-009", productName: "Kit cuidado natural", sku: "NB-KIT-04", quantity: 10, unitPrice: 420, subtotal: 4200, businessId: "biz-007", businessName: "Nativa Beauty Supply" },
+      { id: "item-009", productName: "Kit cuidado natural", sku: "NB-KIT-04", quantity: 10, unitPrice: 420, subtotal: 4200, businessId: "biz-007", businessName: "Herbolaria Nativa" },
     ],
     total: 4200,
     commission: 588,
@@ -177,7 +177,7 @@ export const ordersMock: Order[] = [
     createdAt: "2026-05-15",
     dueDate: "2026-05-18",
     estimatedDeliveryDate: "2026-05-18",
-    notes: "Cancelado por negocio pausado. Reembolso procesado.",
+    notes: "Cancelado por emprendimiento pausado. Reembolso procesado.",
     tags: ["cancelado", "reembolso", "beauty"],
   },
   {
@@ -211,9 +211,9 @@ export const ordersMock: Order[] = [
     customerName: "Sastre Colectivo",
     customerPhone: "+52 999 300 4411",
     businessId: "biz-008",
-    businessName: "Taller Mayab",
+    businessName: "Taller Manos del Mayab",
     items: [
-      { id: "item-011", productName: "Ajuste de muestras uniformes", sku: "TM-AJU-01", quantity: 18, unitPrice: 140, subtotal: 2520, businessId: "biz-008", businessName: "Taller Mayab" },
+      { id: "item-011", productName: "Ajuste de muestras uniformes", sku: "TM-AJU-01", quantity: 18, unitPrice: 140, subtotal: 2520, businessId: "biz-008", businessName: "Taller Manos del Mayab" },
     ],
     total: 2520,
     commission: 252,
@@ -227,7 +227,7 @@ export const ordersMock: Order[] = [
     createdAt: "2026-05-16",
     dueDate: "2026-05-24",
     estimatedDeliveryDate: "2026-05-24",
-    notes: "Negocio inactivo, pero aceptó producción puntual. Dar seguimiento manual.",
+    notes: "Emprendimiento inactivo, pero aceptó producción puntual. Dar seguimiento manual.",
     tags: ["servicios", "pago_parcial", "seguimiento"],
   },
   {
@@ -236,9 +236,9 @@ export const ordersMock: Order[] = [
     customerName: "Tienda Familiar Kukul",
     customerPhone: "+52 999 820 5177",
     businessId: "biz-005",
-    businessName: "BioPack Península",
+    businessName: "EcoEmpaque Caribe",
     items: [
-      { id: "item-012", productName: "Bolsas kraft 25kg", sku: "BP-KRAFT-25", quantity: 120, unitPrice: 70, subtotal: 8400, businessId: "biz-005", businessName: "BioPack Península" },
+      { id: "item-012", productName: "Bolsas kraft 25kg", sku: "BP-KRAFT-25", quantity: 120, unitPrice: 70, subtotal: 8400, businessId: "biz-005", businessName: "EcoEmpaque Caribe" },
     ],
     total: 8400,
     commission: 924,
@@ -259,12 +259,12 @@ export const ordersMock: Order[] = [
 
 export const orderActivitiesMock: OrderActivity[] = [
   { id: "act-ord-001", orderId: "ord-001", title: "Pedido creado", description: "Pedido recibido por WhatsApp y pendiente de confirmación de sabores.", type: "order_created", date: "2026-05-19", responsible: "Diana Flores" },
-  { id: "act-ord-002", orderId: "ord-003", title: "Inventario reservado", description: "Boutique Roma apartó vestido y tote para ruta compartida.", type: "inventory_reserved", date: "2026-05-18", responsible: "Rosa Chi" },
-  { id: "act-ord-003", orderId: "ord-006", title: "Entrega asignada", description: "Ruta Boutique MX inició recorrido Centro CDMX.", type: "delivery_assigned", date: "2026-05-19", responsible: "Enrique Polanco" },
+  { id: "act-ord-002", orderId: "ord-003", title: "Inventario reservado", description: "Moda Artesanal Ixchel apartó vestido y tote para ruta compartida.", type: "inventory_reserved", date: "2026-05-18", responsible: "Rosa Chi" },
+  { id: "act-ord-003", orderId: "ord-006", title: "Entrega asignada", description: "Ruta Comunitaria Maya inició recorrido Centro CDMX.", type: "delivery_assigned", date: "2026-05-19", responsible: "Enrique Polanco" },
   { id: "act-ord-004", orderId: "ord-004", title: "Pedido entregado", description: "Mercados del Sur confirmó recepción completa.", type: "delivered", date: "2026-05-18", responsible: "Alma López" },
   { id: "act-ord-005", orderId: "ord-008", title: "Pago vencido", description: "Se detectó pago vencido antes de recolección.", type: "issue_reported", date: "2026-05-18", responsible: "Diana Flores" },
-  { id: "act-ord-006", orderId: "ord-010", title: "Pago recibido", description: "BioPack Península recibió pago completo por bolsas kraft.", type: "payment_received", date: "2026-05-18", responsible: "Bruno Canto" },
-  { id: "act-ord-007", orderId: "ord-005", title: "Estado actualizado", description: "Textiles León inició surtido de denim con validación pendiente.", type: "status_changed", date: "2026-05-17", responsible: "Carlos Medina" },
+  { id: "act-ord-006", orderId: "ord-010", title: "Pago recibido", description: "EcoEmpaque Caribe recibió pago completo por bolsas kraft.", type: "payment_received", date: "2026-05-18", responsible: "Bruno Canto" },
+  { id: "act-ord-007", orderId: "ord-005", title: "Estado actualizado", description: "Textiles del Mayab inició surtido de denim con validación pendiente.", type: "status_changed", date: "2026-05-17", responsible: "Carlos Medina" },
 ];
 
 export const orderKpisMock: OrderKpi[] = [

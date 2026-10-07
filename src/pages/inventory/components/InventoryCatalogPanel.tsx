@@ -1,4 +1,4 @@
-import { Boxes, Handshake, ShoppingBag, Wrench } from "lucide-react";
+import { Boxes, ShoppingBag, Wrench } from "lucide-react";
 import type { CatalogItem, InventoryItem } from "@/types/inventory.types";
 
 const categoryLabels: Record<InventoryItem["category"], string> = {
@@ -11,25 +11,9 @@ const categoryLabels: Record<InventoryItem["category"], string> = {
 };
 
 const availabilityMap: Record<CatalogItem["availabilityStatus"], { label: string; className: string }> = {
-  available: { label: "Disponible", className: "bg-[#D6D979] text-[#3E5902]" },
-  limited: { label: "Limitado", className: "bg-[#fff2cc] text-[#7a5d00]" },
-  on_demand: { label: "Bajo demanda", className: "bg-[#e8e9e2] text-[#42493f]" },
-};
-
-const useCaseLabels: Record<CatalogItem["cooperativeUseCase"], string> = {
-  compra_conjunta: "Compra conjunta",
-  venta_conjunta: "Venta conjunta",
-  campana_compartida: "Campana compartida",
-  reparticion_bienes: "Reparticion",
-  soporte_post_acuerdo: "Post-acuerdo",
-  no_aplica: "No aplica",
-};
-
-const marketplaceMap: Record<CatalogItem["marketplaceStatus"], string> = {
-  listed: "Marketplace",
-  not_listed: "No listado",
-  paused: "Pausado",
-  pending_review: "Revision",
+  available: { label: "Disponible", className: "bg-[#E6F3C8] text-[#42610A]" },
+  limited: { label: "Limitado", className: "bg-[#FFF0D8] text-[#8C6213]" },
+  on_demand: { label: "Bajo demanda", className: "bg-[#EEF2EA] text-[#607064]" },
 };
 
 const formatCurrency = (value: number) =>
@@ -39,67 +23,49 @@ const formatCurrency = (value: number) =>
     maximumFractionDigits: 0,
   }).format(value);
 
-interface InventoryCatalogPanelProps {
-  catalogItems: CatalogItem[];
-}
-
-export default function InventoryCatalogPanel({ catalogItems }: InventoryCatalogPanelProps) {
+export default function InventoryCatalogPanel({ catalogItems }: { catalogItems: CatalogItem[] }) {
   return (
-    <section className="rounded-lg border border-[#c2c9bc] bg-white p-4">
-      <div className="mb-3 flex items-center justify-between">
-        <h3 className="font-['Hanken_Grotesk'] text-lg font-semibold text-[#1a1c18]">Catalogo comercial</h3>
-        <span className="rounded-full bg-[#e8e9e2] px-2.5 py-1 text-xs font-semibold text-[#42493f]">{catalogItems.length} items</span>
+    <section className="rounded-[22px] border border-[#E3E7DF] bg-white p-5">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h2 className="text-[15px] font-semibold text-[#172019]">Catálogo comercial</h2>
+          <p className="mt-1 text-[11px] text-[#7B867E]">Productos y servicios listos para comercializar.</p>
+        </div>
+        <span className="rounded-full bg-[#F1F4EE] px-2.5 py-1 text-[9px] font-semibold text-[#68736B]">{catalogItems.length} items</span>
       </div>
 
-      <div className="grid max-h-[520px] gap-2 overflow-y-auto pr-1 md:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
         {catalogItems.map((item) => {
           const availability = availabilityMap[item.availabilityStatus];
           return (
-            <article key={item.id} className="rounded-lg border border-[#e2e3dc] bg-[#f9faf3] p-3">
-              <div className="mb-2 flex items-start justify-between gap-2">
-                <div className="flex min-w-0 items-start gap-2">
-                  <span className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-white text-[#4F7302]">
-                    {item.kind === "service" ? <Wrench className="h-4 w-4" /> : <ShoppingBag className="h-4 w-4" />}
-                  </span>
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-[#1a1c18]">{item.name}</p>
-                    <p className="truncate text-xs text-[#42493f]">{item.businessName}</p>
-                  </div>
+            <article key={item.id} className="rounded-[18px] border border-transparent bg-[#FAFAF7] p-4 transition hover:border-[#DDE6D8] hover:bg-white">
+              <div className="flex items-start gap-3">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-[12px] bg-white text-[#287839]">
+                  {item.kind === "service" ? <Wrench className="h-4 w-4" /> : <ShoppingBag className="h-4 w-4" />}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-[11px] font-semibold text-[#2B352F]">{item.name}</p>
+                  <p className="mt-0.5 truncate text-[9.5px] text-[#87918A]">{item.businessName}</p>
                 </div>
-                <span className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold ${availability.className}`}>
-                  {availability.label}
-                </span>
+                <span className={`shrink-0 rounded-full px-2 py-0.5 text-[9px] font-semibold ${availability.className}`}>{availability.label}</span>
               </div>
-              <p className="text-sm font-semibold text-[#1a1c18]">
-                {formatCurrency(item.estimatedPrice)} <span className="text-xs font-normal text-[#42493f]">/ {item.unit}</span>
-              </p>
-              <p className="text-xs text-[#42493f]">
-                {categoryLabels[item.category]} - Comision {item.commissionRate}% - {marketplaceMap[item.marketplaceStatus]}
-              </p>
 
-              <div className="mt-2 flex flex-wrap gap-1.5">
-                {item.availableForCooperative ? (
-                  <span className="inline-flex items-center gap-1 rounded-full bg-[#D6D979] px-2 py-0.5 text-xs font-semibold text-[#3E5902]">
-                    <Handshake className="h-3.5 w-3.5" />
-                    Cooperativo
-                  </span>
-                ) : (
-                  <span className="inline-flex items-center gap-1 rounded-full bg-[#e8e9e2] px-2 py-0.5 text-xs font-semibold text-[#42493f]">
-                    <Boxes className="h-3.5 w-3.5" />
-                    Interno
-                  </span>
-                )}
-                <span className="rounded-full bg-white px-2 py-0.5 text-xs font-semibold text-[#42493f]">
-                  {useCaseLabels[item.cooperativeUseCase]}
-                </span>
+              <p className="mt-4 text-[15px] font-semibold text-[#35523B]">
+                {formatCurrency(item.estimatedPrice)}
+                <span className="ml-1 text-[9px] font-normal text-[#87918A]">/ {item.unit}</span>
+              </p>
+              <p className="mt-1 text-[9.5px] text-[#87918A]">{categoryLabels[item.category]} · Comisión {item.commissionRate}%</p>
+
+              <div className="mt-3 flex flex-wrap gap-1.5">
                 {item.bulkPurchaseEligible ? (
-                  <span className="rounded-full bg-white px-2 py-0.5 text-xs font-semibold text-[#42493f]">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-white px-2 py-1 text-[9px] font-medium text-[#607064]">
+                    <Boxes className="h-3 w-3" />
                     Bulk {item.minimumBulkQuantity}
                   </span>
                 ) : null}
                 {item.payoutPending > 0 ? (
-                  <span className="rounded-full bg-[#fff2cc] px-2 py-0.5 text-xs font-semibold text-[#7a5d00]">
-                    Liquidacion pendiente
+                  <span className="rounded-full bg-[#FFF0D8] px-2 py-1 text-[9px] font-semibold text-[#8C6213]">
+                    Liquidación pendiente
                   </span>
                 ) : null}
               </div>

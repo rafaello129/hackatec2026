@@ -1,4 +1,4 @@
-import { Building2, CalendarClock, MapPin, Package, ReceiptText, Store, Tags } from "lucide-react";
+import { Building2, MapPin, Package, Store, Tags } from "lucide-react";
 import type { InventoryItem, StockMovement } from "@/types/inventory.types";
 import InventoryStatusBadge from "./InventoryStatusBadge";
 
@@ -11,22 +11,6 @@ const categoryLabels: Record<InventoryItem["category"], string> = {
   digital: "Digital",
 };
 
-const useCaseLabels: Record<InventoryItem["cooperativeUseCase"], string> = {
-  compra_conjunta: "Compra conjunta",
-  venta_conjunta: "Venta conjunta",
-  campana_compartida: "Campana compartida",
-  reparticion_bienes: "Reparticion de bienes",
-  soporte_post_acuerdo: "Soporte post-acuerdo",
-  no_aplica: "No aplica",
-};
-
-const marketplaceLabels: Record<InventoryItem["marketplaceStatus"], string> = {
-  listed: "Publicado",
-  not_listed: "No listado",
-  paused: "Pausado",
-  pending_review: "En revision",
-};
-
 const formatCurrency = (value: number) =>
   new Intl.NumberFormat("es-MX", {
     style: "currency",
@@ -34,139 +18,71 @@ const formatCurrency = (value: number) =>
     maximumFractionDigits: 0,
   }).format(value);
 
-interface InventoryDetailPanelProps {
+export default function InventoryDetailPanel({
+  item,
+  movements,
+}: {
   item: InventoryItem | null;
   movements: StockMovement[];
-}
-
-export default function InventoryDetailPanel({ item, movements }: InventoryDetailPanelProps) {
+}) {
   if (!item) {
     return (
-      <section className="rounded-lg border border-[#c2c9bc] bg-white p-4">
-        <h3 className="font-['Hanken_Grotesk'] text-lg font-semibold text-[#1a1c18]">Detalle de inventario</h3>
-        <p className="mt-2 text-sm text-[#42493f]">Selecciona un producto para revisar su ficha operativa.</p>
+      <section className="rounded-[22px] border border-[#E3E7DF] bg-white p-5">
+        <h3 className="text-[15px] font-semibold text-[#172019]">Detalle del producto</h3>
+        <p className="mt-2 text-[11px] leading-5 text-[#7B867E]">Selecciona un producto para revisar su ficha.</p>
       </section>
     );
   }
 
   return (
-    <section className="rounded-lg border border-[#c2c9bc] bg-white p-4">
-      <div className="mb-4 flex items-start justify-between gap-2">
-        <div className="min-w-0">
-          <h3 className="truncate font-['Hanken_Grotesk'] text-lg font-semibold text-[#1a1c18]">{item.name}</h3>
-          <p className="text-sm text-[#42493f]">{item.sku}</p>
+    <section className="rounded-[22px] border border-[#E3E7DF] bg-white p-5">
+      <div className="flex items-start gap-3">
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-[14px] bg-[#EEF1EB] text-[#58715F]">
+          <Package className="h-5 w-5" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <h3 className="truncate text-[15px] font-semibold text-[#172019]">{item.name}</h3>
+          <p className="mt-1 text-[10px] text-[#7B867E]">{item.sku}</p>
         </div>
         <InventoryStatusBadge status={item.status} />
       </div>
 
-      <p className="mb-3 line-clamp-2 text-sm text-[#1a1c18]">{item.description}</p>
+      <p className="mt-4 line-clamp-3 text-[11px] leading-5 text-[#657068]">{item.description}</p>
 
-      <dl className="grid gap-2 text-sm text-[#42493f] sm:grid-cols-2">
-        <div className="flex items-center gap-2">
-          <Store className="h-4 w-4 text-[#799833]" />
-          <span className="truncate">
-            {item.businessName} - {item.ownerName}
+      <div className="mt-4 grid grid-cols-2 gap-3">
+        {[
+          ["Stock", `${item.quantity} ${item.unit}`],
+          ["Valor", formatCurrency(item.estimatedValue)],
+          ["Pedidos", String(item.pendingOrders)],
+          ["Liquidación", formatCurrency(item.payoutPending)],
+        ].map(([label, value]) => (
+          <div key={label} className="rounded-[16px] border border-[#E5E9E2] bg-white p-3.5">
+            <p className="text-[10px] text-[#7F8A82]">{label}</p>
+            <p className="mt-1 text-[12px] font-semibold text-[#2D3931]">{value}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-4 rounded-[18px] bg-[#F2F6EE] p-4">
+        <p className="flex items-center gap-2 text-[10.5px] text-[#657068]"><Store className="h-3.5 w-3.5 text-[#287839]" />{item.businessName} · {item.ownerName}</p>
+        <p className="mt-2 flex items-center gap-2 text-[10.5px] text-[#657068]"><Tags className="h-3.5 w-3.5 text-[#287839]" />{categoryLabels[item.category]} · {item.supplier}</p>
+        <p className="mt-2 flex items-center gap-2 text-[10.5px] text-[#657068]"><MapPin className="h-3.5 w-3.5 text-[#287839]" />{item.location}</p>
+        <p className="mt-2 flex items-center gap-2 text-[10.5px] text-[#657068]"><Building2 className="h-3.5 w-3.5 text-[#287839]" />{item.commissionEligible ? `${item.commissionRate}% comisión` : "Sin comisión"}</p>
+      </div>
+
+      <div className="mt-4 flex flex-wrap gap-2">
+        {item.tags.slice(0, 5).map((tag) => (
+          <span key={tag} className="rounded-full border border-[#DDE5D8] bg-white px-2.5 py-1 text-[9.5px] font-medium text-[#526057]">
+            {tag}
           </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Package className="h-4 w-4 text-[#799833]" />
-          <span>
-            {item.quantity} {item.unit} - Min {item.minStock} / Max {item.maxStock}
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Tags className="h-4 w-4 text-[#799833]" />
-          <span>{categoryLabels[item.category]}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Building2 className="h-4 w-4 text-[#799833]" />
-          <span>{item.supplier}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <MapPin className="h-4 w-4 text-[#799833]" />
-          <span>{item.location}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <CalendarClock className="h-4 w-4 text-[#799833]" />
-          <span>{item.pendingOrders} pedidos pendientes</span>
-        </div>
-      </dl>
-
-      <div className="mt-3 grid gap-2 sm:grid-cols-3">
-        <div className="rounded-lg border border-[#e2e3dc] bg-[#f9faf3] p-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.06em] text-[#42493f]">Valor</p>
-          <p className="font-semibold text-[#1a1c18]">{formatCurrency(item.estimatedValue)}</p>
-        </div>
-        <div className="rounded-lg border border-[#e2e3dc] bg-[#f9faf3] p-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.06em] text-[#42493f]">Comision</p>
-          <p className="font-semibold text-[#1a1c18]">
-            {item.commissionEligible ? `${item.commissionRate}%` : "No aplica"}
-          </p>
-        </div>
-        <div className="rounded-lg border border-[#e2e3dc] bg-[#f9faf3] p-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.06em] text-[#42493f]">Liquidacion</p>
-          <p className="font-semibold text-[#1a1c18]">{formatCurrency(item.payoutPending)}</p>
-        </div>
+        ))}
       </div>
 
-      <div className="mt-3 rounded-lg border border-[#e2e3dc] bg-white p-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.06em] text-[#42493f]">Marketplace</p>
-        <p className="mt-1 text-sm text-[#1a1c18]">{marketplaceLabels[item.marketplaceStatus]}</p>
-        <p className="text-sm text-[#42493f]">
-          {item.listedInMarketplace ? "Disponible para venta digital" : "No publicado actualmente"} - Ultima venta:{" "}
-          {item.lastOrderDate ?? "sin pedidos recientes"}
-        </p>
-      </div>
-
-      <div className="mt-3">
-        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.06em] text-[#42493f]">Tags</p>
-        <div className="flex flex-wrap gap-2">
-          {item.tags.map((tag) => (
-            <span key={tag} className="rounded-full bg-[#D6D979] px-2.5 py-1 text-xs font-semibold text-[#3E5902]">
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <div className="mt-3 rounded-lg border border-[#e2e3dc] bg-white p-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.06em] text-[#42493f]">Preparacion cooperativa</p>
-        <p className="mt-1 text-sm text-[#1a1c18]">Caso: {useCaseLabels[item.cooperativeUseCase]}</p>
-        <p className="text-sm text-[#42493f]">
-          {item.availableForCooperative ? "Apto para alianzas o venta conjunta" : "Uso interno del negocio"} - Proveedor:{" "}
-          {item.preferredSupplier}
-        </p>
-        <p className="text-sm text-[#42493f]">
-          Bulk: {item.bulkPurchaseEligible ? `Si (min ${item.minimumBulkQuantity} ${item.unit})` : "No"}
-        </p>
-      </div>
-
-      <div className="mt-3 rounded-lg border border-[#e2e3dc] bg-[#f9faf3] p-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.06em] text-[#42493f]">Recomendacion</p>
-        <p className="text-sm text-[#1a1c18]">
-          {item.status === "out_of_stock" || item.status === "low_stock"
-            ? "Prioriza reposicion, confirma pedidos pendientes y revisa si conviene compra consolidada."
-            : "Mantener publicado y revisar rotacion semanal por negocio representado."}
-        </p>
-      </div>
-
-      <div className="mt-3">
-        <p className="mb-1 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.06em] text-[#42493f]">
-          <ReceiptText className="h-3.5 w-3.5" />
-          Ultimos movimientos
-        </p>
-        <ul className="space-y-1.5">
-          {movements.slice(0, 3).map((movement) => (
-            <li key={movement.id} className="rounded-md border border-[#e2e3dc] bg-[#f9faf3] px-2.5 py-2 text-xs text-[#42493f]">
-              {movement.date} - {movement.type} - {movement.quantity} ({movement.reason})
-            </li>
-          ))}
-          {movements.length === 0 ? (
-            <li className="rounded-md border border-[#e2e3dc] bg-[#f9faf3] px-2.5 py-2 text-xs text-[#42493f]">
-              Sin movimientos recientes para este item.
-            </li>
-          ) : null}
-        </ul>
+      <div className="mt-4 rounded-[14px] bg-[#ECF5E8] px-3 py-2.5 text-[10px] leading-4 text-[#3F6948]">
+        {item.status === "out_of_stock" || item.status === "low_stock"
+          ? "Conviene priorizar la reposición antes de confirmar nuevos pedidos."
+          : "Stock estable. Mantén seguimiento de rotación y pedidos pendientes."}
+        {movements[0] ? <p className="mt-1 text-[#6E7B72]">Último movimiento: {movements[0].type} · {movements[0].date}</p> : null}
       </div>
     </section>
   );

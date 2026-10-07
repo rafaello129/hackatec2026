@@ -1,4 +1,4 @@
-import { Eye } from "lucide-react";
+import { ChevronRight, Package } from "lucide-react";
 import type { InventoryItem } from "@/types/inventory.types";
 import InventoryStatusBadge from "./InventoryStatusBadge";
 
@@ -12,99 +12,155 @@ const categoryLabels: Record<InventoryItem["category"], string> = {
 };
 
 const marketplaceLabels: Record<InventoryItem["marketplaceStatus"], { label: string; className: string }> = {
-  listed: { label: "Publicado", className: "bg-[#D6D979] text-[#3E5902]" },
-  not_listed: { label: "No listado", className: "bg-[#e8e9e2] text-[#42493f]" },
-  paused: { label: "Pausado", className: "bg-[#fff2cc] text-[#7a5d00]" },
-  pending_review: { label: "Revision", className: "bg-[#fff2cc] text-[#7a5d00]" },
+  listed: { label: "Publicado", className: "bg-[#E6F3C8] text-[#42610A]" },
+  not_listed: { label: "No listado", className: "bg-[#EEF2EA] text-[#607064]" },
+  paused: { label: "Pausado", className: "bg-[#FFF0D8] text-[#8C6213]" },
+  pending_review: { label: "Revisión", className: "bg-[#FFF0D8] text-[#8C6213]" },
 };
 
-interface InventoryTableProps {
+export default function InventoryTable({
+  items,
+  selectedItemId,
+  onSelectItem,
+}: {
   items: InventoryItem[];
   selectedItemId: string | null;
   onSelectItem: (itemId: string) => void;
-}
+}) {
+  if (items.length === 0) {
+    return (
+      <div className="rounded-[18px] border border-dashed border-[#DDE4D9] bg-[#F8FAF6] px-5 py-10 text-center">
+        <p className="text-sm font-semibold text-[#344039]">No encontramos productos con estos filtros.</p>
+        <p className="mt-1 text-[11px] text-[#7E8981]">Prueba con otro nombre, negocio, categoría o estado.</p>
+      </div>
+    );
+  }
 
-export default function InventoryTable({ items, selectedItemId, onSelectItem }: InventoryTableProps) {
   return (
-    <div className="max-w-full overflow-x-auto rounded-lg border border-[#e2e3dc]">
-      <table className="w-full min-w-[900px] table-fixed text-left text-sm">
-        <thead className="bg-[#f3f4ed] text-xs uppercase tracking-[0.06em] text-[#42493f]">
-          <tr>
-            <th className="w-[23%] px-3 py-3">Producto</th>
-            <th className="w-[19%] px-3 py-3">Negocio</th>
-            <th className="w-[13%] px-3 py-3">Categoria</th>
-            <th className="w-[13%] px-3 py-3">Stock</th>
-            <th className="w-[11%] px-3 py-3">Estado</th>
-            <th className="w-[12%] px-3 py-3">Marketplace</th>
-            <th className="w-[6%] px-3 py-3">Com.</th>
-            <th className="w-[3%] px-3 py-3 text-right">Accion</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((item) => {
-            const isSelected = item.id === selectedItemId;
-            const marketplace = marketplaceLabels[item.marketplaceStatus];
-            return (
-              <tr
-                key={item.id}
-                onClick={() => onSelectItem(item.id)}
-                className={`cursor-pointer border-t border-[#e8e9e2] transition hover:bg-[#f9faf3] ${
-                  isSelected ? "bg-[#f3f4ed]" : "bg-white"
-                }`}
-              >
-                <td className="px-3 py-2.5">
-                  <p className="truncate font-semibold text-[#1a1c18]">{item.name}</p>
-                  <p className="truncate text-xs text-[#42493f]">{item.sku}</p>
-                </td>
-                <td className="px-3 py-2.5">
-                  <p className="truncate font-semibold text-[#1a1c18]">{item.businessName}</p>
-                  <p className="truncate text-xs text-[#42493f]">{item.ownerName}</p>
-                </td>
-                <td className="px-3 py-2.5 text-[#42493f]">
-                  <span className="block truncate">{categoryLabels[item.category]}</span>
-                </td>
-                <td className="px-3 py-2.5">
-                  <p className="truncate font-semibold text-[#1a1c18]">
-                    {item.quantity} {item.unit}
-                  </p>
-                  <p className="text-xs text-[#42493f]">{item.pendingOrders} pedidos</p>
-                </td>
-                <td className="px-3 py-2.5">
-                  <InventoryStatusBadge status={item.status} />
-                </td>
-                <td className="px-3 py-2.5">
-                  <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${marketplace.className}`}>
+    <>
+      <div className="hidden overflow-hidden rounded-[18px] border border-[#E1E6DE] bg-white md:block">
+        <table className="w-full table-fixed text-left">
+          <thead className="bg-[linear-gradient(90deg,#F4F8F1_0%,#FAFBF8_100%)]">
+            <tr className="text-[10px] font-semibold uppercase tracking-[0.055em] text-[#718078]">
+              <th className="w-[38%] px-4 py-3.5">Producto</th>
+              <th className="w-[22%] px-3 py-3.5">Negocio</th>
+              <th className="w-[16%] px-3 py-3.5">Disponibles</th>
+              <th className="w-[14%] px-3 py-3.5">Estado</th>
+              <th className="w-[10%] px-4 py-3.5" />
+            </tr>
+          </thead>
+
+          <tbody>
+            {items.map((item) => {
+              const marketplace = marketplaceLabels[item.marketplaceStatus];
+              const selected = item.id === selectedItemId;
+
+              return (
+                <tr
+                  key={item.id}
+                  tabIndex={0}
+                  role="button"
+                  onClick={() => onSelectItem(item.id)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      onSelectItem(item.id);
+                    }
+                  }}
+                  className={`group cursor-pointer border-t border-[#EEF0EB] outline-none transition-colors focus-visible:bg-[#F4F8F1] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#9AC84B]/45 ${selected ? "bg-[#F4F8F1]" : "bg-white hover:bg-[#FAFCF8]"}`}
+                >
+                  <td className="px-4 py-3.5">
+                    <div className="flex min-w-0 items-center gap-3">
+                      <span className="grid h-12 w-12 shrink-0 place-items-center rounded-[14px] bg-[#EEF1EB] text-[#58715F] transition-transform group-hover:scale-[1.04]">
+                        <Package className="h-5 w-5" />
+                      </span>
+                      <div className="min-w-0">
+                        <p className="truncate text-[12px] font-semibold text-[#263129]">{item.name}</p>
+                        <div className="mt-1 flex items-center gap-2">
+                          <span className="text-[10px] text-[#849087]">{categoryLabels[item.category]}</span>
+                          <span className="h-1.5 w-1.5 rounded-full bg-[#AAB5AD]" />
+                          <span className={`rounded-full px-2 py-0.5 text-[9px] font-semibold ${marketplace.className}`}>
+                            {marketplace.label}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td className="px-3 py-3.5">
+                    <p className="truncate text-[11px] font-semibold text-[#344039]">{item.businessName}</p>
+                    <p className="mt-0.5 truncate text-[9.5px] text-[#87918A]">{item.ownerName}</p>
+                  </td>
+
+                  <td className="px-3 py-3.5">
+                    <p className={item.status === "out_of_stock" ? "text-[12px] font-bold text-[#B84D44]" : item.status === "low_stock" ? "text-[12px] font-bold text-[#9A6A04]" : "text-[12px] font-bold text-[#2B352F]"}>
+                      {item.quantity} {item.unit}
+                    </p>
+                    <p className="mt-0.5 text-[9px] text-[#87918A]">{item.pendingOrders} pedidos pendientes</p>
+                  </td>
+
+                  <td className="px-3 py-3.5">
+                    <InventoryStatusBadge status={item.status} />
+                  </td>
+
+                  <td className="px-4 py-3.5 text-right">
+                    <span className="ml-auto grid h-8 w-8 place-items-center rounded-full text-[#929C95] transition-all group-hover:bg-[#E6F1E4] group-hover:text-[#135C2F]">
+                      <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                    </span>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="space-y-2.5 md:hidden">
+        {items.map((item) => {
+          const marketplace = marketplaceLabels[item.marketplaceStatus];
+          return (
+            <button
+              key={item.id}
+              type="button"
+              onClick={() => onSelectItem(item.id)}
+              className={`w-full rounded-[18px] border bg-white p-4 text-left transition-all hover:-translate-y-0.5 hover:shadow-sm ${item.id === selectedItemId ? "border-[#9AB48F] ring-2 ring-[#9AC84B]/10" : "border-[#E4E8E1] hover:border-[#CFD8CC]"}`}
+            >
+              <div className="flex items-start gap-3">
+                <span className="grid h-14 w-14 shrink-0 place-items-center rounded-[15px] bg-[#EEF1EB] text-[#58715F]">
+                  <Package className="h-5 w-5" />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="line-clamp-2 text-[12px] font-semibold text-[#263129]">{item.name}</p>
+                  <p className="mt-1 text-[10px] text-[#849087]">{item.businessName}</p>
+                  <span className={`mt-2 inline-flex rounded-full px-2 py-0.5 text-[9px] font-semibold ${marketplace.className}`}>
                     {marketplace.label}
                   </span>
-                </td>
-                <td className="px-3 py-2.5 font-semibold text-[#1a1c18]">{item.commissionRate}%</td>
-                <td className="px-3 py-2.5">
-                  <div className="flex items-center justify-end gap-1">
-                    <button
-                      type="button"
-                      aria-label={`Ver detalle de ${item.name}`}
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        onSelectItem(item.id);
-                      }}
-                      className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-[#c2c9bc] bg-white text-[#42493f] hover:bg-[#f3f4ed]"
-                    >
-                      <Eye className="h-4 w-4" />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            );
-          })}
-          {items.length === 0 ? (
-            <tr>
-              <td colSpan={8} className="px-3 py-8 text-center text-sm text-[#42493f]">
-                No se encontraron productos con los filtros actuales.
-              </td>
-            </tr>
-          ) : null}
-        </tbody>
-      </table>
-    </div>
+                </div>
+                <ChevronRight className="h-4 w-4 text-[#929C95]" />
+              </div>
+
+              <div className="mt-4 grid grid-cols-3 gap-2 rounded-2xl bg-[linear-gradient(135deg,#F7F9F4_0%,#F3F7EF_100%)] p-3">
+                <div>
+                  <p className="text-[9px] uppercase tracking-wide text-[#889289]">Stock</p>
+                  <p className="mt-1 text-[10px] font-semibold text-[#344039]">{item.quantity}</p>
+                </div>
+                <div>
+                  <p className="text-[9px] uppercase tracking-wide text-[#889289]">Pedidos</p>
+                  <p className="mt-1 text-[10px] font-semibold text-[#344039]">{item.pendingOrders}</p>
+                </div>
+                <div>
+                  <p className="text-[9px] uppercase tracking-wide text-[#889289]">Comisión</p>
+                  <p className="mt-1 text-[10px] font-semibold text-[#344039]">{item.commissionRate}%</p>
+                </div>
+              </div>
+
+              <span className="mt-3 inline-flex">
+                <InventoryStatusBadge status={item.status} />
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </>
   );
 }

@@ -1,71 +1,66 @@
-import { AlertTriangle, BellRing, Sparkles, TriangleAlert } from "lucide-react";
+import { AlertTriangle, ArrowRight, BellRing, TriangleAlert } from "lucide-react";
 import type { InventoryAlert } from "@/types/inventory.types";
 
-const severityMap: Record<InventoryAlert["severity"], { label: string; tone: string; icon: typeof AlertTriangle }> = {
-  high: { label: "Alta", tone: "bg-[#ffdad6] text-[#93000a]", icon: TriangleAlert },
-  medium: { label: "Media", tone: "bg-[#fff2cc] text-[#7a5d00]", icon: AlertTriangle },
-  low: { label: "Baja", tone: "bg-[#e8e9e2] text-[#42493f]", icon: BellRing },
+const severityMap: Record<InventoryAlert["severity"], { label: string; icon: typeof AlertTriangle; className: string }> = {
+  high: { label: "Alta", icon: TriangleAlert, className: "bg-[#FDE9E6] text-[#B84D44]" },
+  medium: { label: "Media", icon: AlertTriangle, className: "bg-[#FFF0D8] text-[#9A6A04]" },
+  low: { label: "Baja", icon: BellRing, className: "bg-[#EEF2EA] text-[#607064]" },
 };
 
-interface InventoryAlertPanelProps {
+export default function InventoryAlertPanel({
+  alerts,
+  resolveItemName,
+  resolveItemBusiness,
+}: {
   alerts: InventoryAlert[];
   resolveItemName: (itemId: string) => string;
   resolveItemBusiness?: (itemId: string) => string;
-}
+}) {
+  const visible = alerts.slice(0, 4);
 
-export default function InventoryAlertPanel({ alerts, resolveItemName, resolveItemBusiness }: InventoryAlertPanelProps) {
   return (
-    <section className="rounded-lg border border-[#c2c9bc] bg-white p-4">
-      <div className="mb-3 flex items-center justify-between gap-2">
-        <h3 className="font-['Hanken_Grotesk'] text-lg font-semibold text-[#1a1c18]">Alertas operativas</h3>
-        <span className="rounded-full bg-[#e8e9e2] px-2.5 py-1 text-xs font-semibold text-[#42493f]">{alerts.length}</span>
+    <article className="rounded-[22px] border border-[#E3E7DF] bg-white p-5">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h2 className="text-[15px] font-semibold text-[#172019]">Productos que necesitan atención</h2>
+          <p className="mt-1 text-[11px] text-[#7B867E]">Revisa qué conviene atender primero.</p>
+        </div>
+        <span className="rounded-full bg-[#F1F4EE] px-2 py-1 text-[9px] font-semibold text-[#68736B]">{alerts.length}</span>
       </div>
 
-      <ul className="grid gap-2">
-        {alerts.map((alert) => {
-          const mapped = severityMap[alert.severity];
-          const Icon = mapped.icon;
-          const cooperativeHint = /cooperativ|conjunta|acuerdo/i.test(alert.recommendation);
-          return (
-            <li key={alert.id} className="rounded-lg border border-[#e2e3dc] bg-[#f9faf3] p-3">
-              <div className="mb-1 flex items-start justify-between gap-2">
-                <div className="flex items-center gap-2">
-                  <span className={`inline-flex h-7 w-7 items-center justify-center rounded-md ${mapped.tone}`}>
-                    <Icon className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <p className="text-sm font-semibold text-[#1a1c18]">{alert.title}</p>
-                    <p className="text-xs text-[#42493f]">
-                      {resolveItemBusiness ? `${resolveItemBusiness(alert.itemId)} - ` : ""}
-                      {resolveItemName(alert.itemId)}
-                    </p>
-                  </div>
-                </div>
-                <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${mapped.tone}`}>
-                  Prioridad {mapped.label}
+      <div className="mt-4 divide-y divide-[#EEF0EB]">
+        {visible.length === 0 ? (
+          <div className="rounded-2xl bg-[#F6F8F3] px-3 py-4 text-[11px] text-[#66736A]">
+            Todo en orden. No hay productos pendientes de atención.
+          </div>
+        ) : (
+          visible.map((alert) => {
+            const mapped = severityMap[alert.severity];
+            const Icon = mapped.icon;
+            return (
+              <div key={alert.id} className="flex items-center gap-3 py-3 first:pt-0 last:pb-0">
+                <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-[12px] ${mapped.className}`}>
+                  <Icon className="h-4 w-4" />
                 </span>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-[11px] font-semibold text-[#2B352F]">{resolveItemName(alert.itemId)}</p>
+                  <p className="mt-0.5 truncate text-[10px] text-[#87918A]">
+                    {resolveItemBusiness ? resolveItemBusiness(alert.itemId) + " · " : ""}{alert.title}
+                  </p>
+                </div>
+                <span className={`rounded-full px-2 py-0.5 text-[9px] font-semibold ${mapped.className}`}>{mapped.label}</span>
               </div>
+            );
+          })
+        )}
+      </div>
 
-              <p className="line-clamp-2 text-xs leading-5 text-[#42493f]">{alert.description}</p>
-              <div className="mt-2 rounded-md border border-[#e2e3dc] bg-white p-2 text-xs text-[#1a1c18]">
-                <span className="font-semibold">Recomendacion: </span>
-                {alert.recommendation}
-              </div>
-              {cooperativeHint ? (
-                <p className="mt-2 inline-flex items-center gap-1 rounded-full bg-[#D6D979] px-2.5 py-1 text-xs font-semibold text-[#3E5902]">
-                  <Sparkles className="h-3.5 w-3.5" />
-                  Posible oportunidad cooperativa
-                </p>
-              ) : null}
-            </li>
-          );
-        })}
-        {alerts.length === 0 ? (
-          <li className="rounded-lg border border-[#e2e3dc] bg-[#f9faf3] p-3 text-sm text-[#42493f]">
-            No hay alertas activas en este momento.
-          </li>
-        ) : null}
-      </ul>
-    </section>
+      {alerts.length > visible.length ? (
+        <div className="mt-4 inline-flex items-center gap-1 text-[10px] font-semibold text-[#287839]">
+          {alerts.length - visible.length} alertas más
+          <ArrowRight className="h-3 w-3" />
+        </div>
+      ) : null}
+    </article>
   );
 }

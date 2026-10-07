@@ -1,18 +1,14 @@
 import type { InventoryStatus } from "@/types/inventory.types";
 
 const statusMap: Record<InventoryStatus, { label: string; className: string }> = {
-  in_stock: { label: "En stock", className: "bg-[#D6D979] text-[#3E5902]" },
-  low_stock: { label: "Bajo stock", className: "bg-[#fff2cc] text-[#7a5d00]" },
-  out_of_stock: { label: "Sin stock", className: "bg-[#ffdad6] text-[#93000a]" },
-  reserved: { label: "Reservado", className: "bg-[#e8e9e2] text-[#42493f]" },
-  discontinued: { label: "Descontinuado", className: "bg-[#e2e3dc] text-[#586056]" },
+  in_stock: { label: "Disponible", className: "bg-[#E6F3C8] text-[#42610A]" },
+  low_stock: { label: "Por agotarse", className: "bg-[#FFF0D8] text-[#8C6213]" },
+  out_of_stock: { label: "Agotado", className: "bg-[#FDE9E6] text-[#A54A42]" },
+  reserved: { label: "Reservado", className: "bg-[#EEF2EA] text-[#607064]" },
+  discontinued: { label: "Descontinuado", className: "bg-[#EEF2EA] text-[#607064]" },
 };
 
-interface InventoryStatusBadgeProps {
-  status: InventoryStatus;
-}
-
-export default function InventoryStatusBadge({ status }: InventoryStatusBadgeProps) {
+export default function InventoryStatusBadge({ status }: { status: InventoryStatus }) {
   const mapped = statusMap[status];
-  return <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ${mapped.className}`}>{mapped.label}</span>;
+  return <span className={`inline-flex rounded-full px-2.5 py-1 text-[9px] font-semibold ${mapped.className}`}>{mapped.label}</span>;
 }

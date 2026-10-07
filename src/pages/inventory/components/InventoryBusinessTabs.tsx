@@ -1,4 +1,4 @@
-import { AlertTriangle, Store } from "lucide-react";
+import { AlertTriangle } from "lucide-react";
 import type { InventoryBusinessFilter } from "@/pages/inventory/hooks/useInventory";
 
 interface InventoryBusinessOption {
@@ -6,12 +6,6 @@ interface InventoryBusinessOption {
   name: string;
   count: number;
   hasAttention: boolean;
-}
-
-interface InventoryBusinessTabsProps {
-  businesses: InventoryBusinessOption[];
-  activeBusinessId: InventoryBusinessFilter;
-  onBusinessChange: (businessId: InventoryBusinessFilter) => void;
 }
 
 const shortName = (name: string) =>
@@ -24,40 +18,39 @@ export default function InventoryBusinessTabs({
   businesses,
   activeBusinessId,
   onBusinessChange,
-}: InventoryBusinessTabsProps) {
+}: {
+  businesses: InventoryBusinessOption[];
+  activeBusinessId: InventoryBusinessFilter;
+  onBusinessChange: (businessId: InventoryBusinessFilter) => void;
+}) {
   return (
-    <section className="rounded-lg border border-[#c2c9bc] bg-white p-3">
-      <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.06em] text-[#42493f]">
-        <Store className="h-4 w-4 text-[#799833]" />
-        Inventario por negocio
+    <div className="max-w-full overflow-x-auto pb-1">
+      <div className="flex min-w-max gap-2" aria-label="Filtrar productos por negocio">
+        {businesses.map((business) => {
+          const active = activeBusinessId === business.id;
+          return (
+            <button
+              key={business.id}
+              type="button"
+              onClick={() => onBusinessChange(business.id)}
+              aria-pressed={active}
+              className={
+                active
+                  ? "inline-flex h-8 items-center gap-2 rounded-full bg-[#135C2F] px-4 text-[11px] font-semibold text-white transition"
+                  : "inline-flex h-8 items-center gap-2 rounded-full border border-[#DFE4DC] bg-white px-4 text-[11px] font-medium text-[#657068] transition hover:border-[#C7D3C5] hover:bg-[#F8FAF6] hover:text-[#2E4935]"
+              }
+            >
+              <span>{shortName(business.name)}</span>
+              <span className={active ? "rounded-full bg-white/15 px-1.5 py-0.5 text-[9px]" : "rounded-full bg-[#F1F4EE] px-1.5 py-0.5 text-[9px] text-[#7B867E]"}>
+                {business.count}
+              </span>
+              {business.hasAttention ? (
+                <AlertTriangle className={active ? "h-3 w-3 text-[#DFF19A]" : "h-3 w-3 text-[#B27B0A]"} />
+              ) : null}
+            </button>
+          );
+        })}
       </div>
-      <div className="max-w-full overflow-x-auto pb-1">
-        <div className="flex min-w-max gap-2">
-          {businesses.map((business) => {
-            const isActive = activeBusinessId === business.id;
-            return (
-              <button
-                key={business.id}
-                type="button"
-                onClick={() => onBusinessChange(business.id)}
-                className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm font-semibold transition ${
-                  isActive
-                    ? "border-[#4F7302] bg-[#D6D979] text-[#3E5902]"
-                    : "border-[#c2c9bc] bg-[#f9faf3] text-[#42493f] hover:bg-[#f3f4ed]"
-                }`}
-              >
-                <span>{shortName(business.name)}</span>
-                <span className={`rounded-full px-2 py-0.5 text-xs ${isActive ? "bg-white/70" : "bg-white"}`}>
-                  {business.count}
-                </span>
-                {business.hasAttention ? (
-                  <AlertTriangle className={`h-3.5 w-3.5 ${isActive ? "text-[#3E5902]" : "text-[#7a5d00]"}`} />
-                ) : null}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-    </section>
+    </div>
   );
 }

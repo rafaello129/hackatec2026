@@ -12,7 +12,7 @@ export const businessProfileMock: BusinessProfile = {
   industry: "sustainable_technology",
   website: "maak.com",
   description:
-    "Plataforma empresarial para coordinar clientes, inventario, finanzas y oportunidades cooperativas entre negocios aliados.",
+    "Plataforma comunitaria para acompañar emprendimientos locales, coordinar productos, pedidos, inventario y liquidaciones desde una sola operación.",
   logoUrl: `${import.meta.env.BASE_URL}brand/maak-logo.svg`,
   logoAlt: "Logo de MÁAK",
 };

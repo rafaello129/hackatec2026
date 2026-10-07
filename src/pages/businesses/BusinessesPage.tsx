@@ -1,6 +1,4 @@
 import { Plus } from "lucide-react";
-import PageIntro from "@/components/common/PageIntro";
-import SectionCard from "@/components/common/SectionCard";
 import BusinessActivityPanel from "./components/BusinessActivityPanel";
 import BusinessDetailPanel from "./components/BusinessDetailPanel";
 import BusinessFilters from "./components/BusinessFilters";
@@ -33,63 +31,99 @@ export default function BusinessesPage() {
   } = useBusinesses();
 
   return (
-    <div className="w-full max-w-full space-y-6 overflow-hidden">
-      <PageIntro
-        title="Negocios intermediados"
-        description="Administra los negocios que representas digitalmente, su operación, pedidos, inventario y liquidaciones."
-        actions={
-          <button
-            type="button"
-            disabled
-            className="inline-flex cursor-not-allowed items-center gap-2 rounded-lg bg-[#4F7302] px-4 py-2 text-sm font-semibold text-white opacity-80"
-          >
-            <Plus className="h-4 w-4" />
-            Agregar negocio
-          </button>
-        }
-      />
-
-      <BusinessKpiCards kpis={kpis} />
-
-      <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_360px] xl:items-start">
-        <SectionCard title="Directorio operativo">
-          <BusinessFilters
-            searchText={searchText}
-            onSearchTextChange={setSearchText}
-            statusFilter={statusFilter}
-            onStatusFilterChange={setStatusFilter}
-            categoryFilter={categoryFilter}
-            onCategoryFilterChange={setCategoryFilter}
-            onClearFilters={clearFilters}
-            statusOptions={statusOptions}
-            categoryOptions={categoryOptions}
-          />
-          {isLoading ? (
-            <div className="rounded-lg border border-[#e2e3dc] bg-[#f9faf3] p-6 text-sm text-[#42493f]">
-              Cargando negocios intermediados...
-            </div>
-          ) : (
-            <BusinessTable
-              businesses={filteredBusinesses}
-              selectedBusinessId={selectedBusinessId}
-              onSelectBusiness={setSelectedBusinessId}
-            />
-          )}
-        </SectionCard>
-
-        <div className="min-w-0 space-y-4">
-          <BusinessDetailPanel
-            business={selectedBusiness}
-            activities={selectedBusinessActivities}
-            tasks={selectedBusinessTasks}
-          />
+    <div className="space-y-5 pb-5">
+      <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1 className="font-['Hanken_Grotesk'] text-[34px] font-bold leading-none text-[#172019]">
+            Negocios
+          </h1>
+          <p className="mt-2 text-[13px] text-[#657068]">
+            Administra los negocios que representas y revisa su operación reciente.
+          </p>
         </div>
-      </div>
 
-      <div className="grid gap-4 xl:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] xl:items-start">
-        <BusinessOnboardingPanel tasks={selectedBusinessTasks.length > 0 ? selectedBusinessTasks : onboardingTasks} />
-        <BusinessActivityPanel activities={selectedBusinessActivities.length > 0 ? selectedBusinessActivities : activities} />
-      </div>
+        <button
+          type="button"
+          disabled
+          className="inline-flex h-11 w-fit cursor-not-allowed items-center justify-center gap-2 rounded-full bg-[#073B1E] px-5 text-[12px] font-semibold text-white opacity-80"
+        >
+          <Plus className="h-4 w-4" />
+          Agregar negocio
+        </button>
+      </header>
+
+      {isLoading ? (
+        <>
+          <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            {[0, 1, 2, 3].map((item) => (
+              <div
+                key={item}
+                className="h-[132px] animate-pulse rounded-[20px] border border-[#E3E7DF] bg-white"
+              />
+            ))}
+          </section>
+          <section className="grid gap-4 xl:grid-cols-[minmax(0,1.9fr)_360px]">
+            <div className="h-[590px] animate-pulse rounded-[24px] border border-[#E3E7DF] bg-white" />
+            <div className="space-y-4">
+              <div className="h-[360px] animate-pulse rounded-[22px] border border-[#E3E7DF] bg-white" />
+              <div className="h-[260px] animate-pulse rounded-[22px] border border-[#E3E7DF] bg-white" />
+            </div>
+          </section>
+        </>
+      ) : (
+        <>
+          <BusinessKpiCards kpis={kpis} />
+
+          <section className="grid items-start gap-4 xl:grid-cols-[minmax(0,1.9fr)_360px]">
+            <section className="rounded-[24px] border border-[#E1E6DE] bg-white p-5 transition-shadow duration-300 hover:shadow-[0_16px_42px_rgba(23,35,27,0.05)] sm:p-6">
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <h2 className="text-[17px] font-semibold text-[#172019]">Tus negocios</h2>
+                  <p className="mt-1 text-[11px] text-[#7B867E]">
+                    {filteredBusinesses.length} {filteredBusinesses.length === 1 ? "negocio" : "negocios"}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-5">
+                <BusinessFilters
+                  searchText={searchText}
+                  onSearchTextChange={setSearchText}
+                  statusFilter={statusFilter}
+                  onStatusFilterChange={setStatusFilter}
+                  categoryFilter={categoryFilter}
+                  onCategoryFilterChange={setCategoryFilter}
+                  onClearFilters={clearFilters}
+                  statusOptions={statusOptions}
+                  categoryOptions={categoryOptions}
+                />
+              </div>
+
+              <div className="mt-5">
+                <BusinessTable
+                  businesses={filteredBusinesses}
+                  selectedBusinessId={selectedBusinessId}
+                  onSelectBusiness={setSelectedBusinessId}
+                />
+              </div>
+            </section>
+
+            <div className="min-w-0 space-y-4">
+              <BusinessDetailPanel
+                business={selectedBusiness}
+                activities={selectedBusinessActivities}
+                tasks={selectedBusinessTasks}
+              />
+              <BusinessOnboardingPanel
+                tasks={selectedBusinessTasks.length > 0 ? selectedBusinessTasks : onboardingTasks}
+              />
+              <BusinessActivityPanel
+                activities={selectedBusinessActivities.length > 0 ? selectedBusinessActivities : activities}
+              />
+            </div>
+          </section>
+        </>
+      )}
     </div>
   );
 }

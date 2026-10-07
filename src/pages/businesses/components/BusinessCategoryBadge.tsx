@@ -14,7 +14,7 @@ export const businessCategoryLabels: Record<BusinessCategory, string> = {
 
 export default function BusinessCategoryBadge({ category }: { category: BusinessCategory }) {
   return (
-    <span className="inline-flex rounded-full bg-[#e8e9e2] px-2.5 py-1 text-xs font-semibold text-[#42493f]">
+    <span className="inline-flex rounded-full bg-[#F5F7F2] px-2.5 py-1 text-[9px] font-medium text-[#667169]">
       {businessCategoryLabels[category]}
     </span>
   );

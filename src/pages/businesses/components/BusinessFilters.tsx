@@ -25,45 +25,71 @@ export default function BusinessFilters({
   categoryOptions,
 }: BusinessFiltersProps) {
   return (
-    <div className="mb-4 grid gap-3 rounded-lg border border-[#e2e3dc] bg-[#f9faf3] p-3 lg:grid-cols-[minmax(0,1fr)_190px_210px_auto]">
-      <label className="relative min-w-0">
-        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#42493f]" />
+    <div>
+      <label className="relative block">
+        <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#7E8981]" />
         <input
           value={searchText}
           onChange={(event) => onSearchTextChange(event.target.value)}
-          placeholder="Buscar negocio, propietario, ubicación o tag..."
-          className="h-10 w-full rounded-lg border border-[#c2c9bc] bg-white py-2 pl-9 pr-3 text-sm text-[#1a1c18] outline-none transition focus:border-[#4F7302]"
+          placeholder="Buscar por negocio, propietario, ubicación o etiqueta..."
+          className="h-11 w-full rounded-full border border-transparent bg-[#F6F7F2] pl-11 pr-4 text-[12px] text-[#263129] outline-none transition placeholder:text-[#89938C] focus:border-[#CAD7C5] focus:bg-white focus:ring-2 focus:ring-[#9AC84B]/15"
         />
       </label>
 
-      <select
-        value={statusFilter}
-        onChange={(event) => onStatusFilterChange(event.target.value as BusinessStatusFilter)}
-        className="h-10 rounded-lg border border-[#c2c9bc] bg-white px-3 text-sm text-[#1a1c18] outline-none transition focus:border-[#4F7302]"
-      >
-        {statusOptions.map((option) => (
-          <option key={option.value} value={option.value}>{option.label}</option>
-        ))}
-      </select>
+      <div className="mt-4 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex flex-wrap gap-2" aria-label="Filtrar negocios por estado">
+          {statusOptions.map((option) => {
+            const active = statusFilter === option.value;
+            const shortLabel =
+              option.value === "all"
+                ? "Todos"
+                : option.value === "needs_attention"
+                  ? "Atención"
+                  : option.value === "onboarding"
+                    ? "Onboarding"
+                    : option.label;
 
-      <select
-        value={categoryFilter}
-        onChange={(event) => onCategoryFilterChange(event.target.value as BusinessCategoryFilter)}
-        className="h-10 rounded-lg border border-[#c2c9bc] bg-white px-3 text-sm text-[#1a1c18] outline-none transition focus:border-[#4F7302]"
-      >
-        {categoryOptions.map((option) => (
-          <option key={option.value} value={option.value}>{option.label}</option>
-        ))}
-      </select>
+            return (
+              <button
+                key={option.value}
+                type="button"
+                aria-pressed={active}
+                onClick={() => onStatusFilterChange(option.value)}
+                className={
+                  active
+                    ? "inline-flex h-8 items-center justify-center rounded-full bg-[#135C2F] px-4 text-[11px] font-semibold text-white transition"
+                    : "inline-flex h-8 items-center justify-center rounded-full border border-[#DFE4DC] bg-white px-4 text-[11px] font-medium text-[#657068] transition hover:border-[#C7D3C5] hover:bg-[#F8FAF6] hover:text-[#2E4935]"
+                }
+              >
+                {shortLabel}
+              </button>
+            );
+          })}
+        </div>
 
-      <button
-        type="button"
-        onClick={onClearFilters}
-        className="inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-[#c2c9bc] bg-white px-3 text-sm font-semibold text-[#42493f] hover:bg-[#f3f4ed]"
-      >
-        <X className="h-4 w-4" />
-        Limpiar
-      </button>
+        <div className="flex flex-wrap items-center gap-2">
+          <select
+            value={categoryFilter}
+            onChange={(event) => onCategoryFilterChange(event.target.value as BusinessCategoryFilter)}
+            className="h-9 min-w-[170px] rounded-full border border-[#DFE4DC] bg-white px-3 text-[11px] font-medium text-[#657068] outline-none transition focus:border-[#9AB48F]"
+          >
+            {categoryOptions.map((option) => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
+          </select>
+
+          {(statusFilter !== "all" || categoryFilter !== "all" || searchText) && (
+            <button
+              type="button"
+              onClick={onClearFilters}
+              className="inline-flex h-9 items-center justify-center gap-1.5 rounded-full border border-[#DFE4DC] bg-white px-3 text-[10px] font-semibold text-[#657068] transition hover:bg-[#F8FAF6]"
+            >
+              <X className="h-3.5 w-3.5" />
+              Limpiar
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

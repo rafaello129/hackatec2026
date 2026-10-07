@@ -1,9 +1,12 @@
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone, Store } from "lucide-react";
 import type { BusinessActivity, BusinessOnboardingTask, IntermediatedBusiness } from "@/types/business.types";
 import BusinessCategoryBadge from "./BusinessCategoryBadge";
 import BusinessStatusBadge from "./BusinessStatusBadge";
 
 const money = new Intl.NumberFormat("es-MX", { currency: "MXN", maximumFractionDigits: 0, style: "currency" });
+
+const initials = (name: string) =>
+  name.split(" ").filter(Boolean).slice(0, 2).map((part) => part[0]).join("").toUpperCase();
 
 export default function BusinessDetailPanel({
   business,
@@ -16,9 +19,9 @@ export default function BusinessDetailPanel({
 }) {
   if (!business) {
     return (
-      <section className="rounded-lg border border-[#c2c9bc] bg-white p-4">
-        <h2 className="font-['Hanken_Grotesk'] text-lg font-semibold text-[#1a1c18]">Detalle del negocio</h2>
-        <p className="mt-2 text-sm text-[#42493f]">Selecciona un negocio para ver su operación.</p>
+      <section className="rounded-[22px] border border-[#E3E7DF] bg-white p-5">
+        <h3 className="text-[15px] font-semibold text-[#172019]">Detalle del negocio</h3>
+        <p className="mt-2 text-[11px] leading-5 text-[#7B867E]">Selecciona un negocio para revisar su operación.</p>
       </section>
     );
   }
@@ -26,65 +29,60 @@ export default function BusinessDetailPanel({
   const openTasks = tasks.filter((task) => !task.completed).length;
 
   return (
-    <section className="rounded-lg border border-[#c2c9bc] bg-white p-4">
-      <div className="flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <h2 className="truncate font-['Hanken_Grotesk'] text-xl font-semibold text-[#1a1c18]">{business.name}</h2>
-          <p className="mt-1 text-sm text-[#42493f]">Propietario: {business.ownerName}</p>
+    <section className="rounded-[22px] border border-[#E3E7DF] bg-white p-5">
+      <div className="flex items-start gap-3">
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#E6F1E4] text-[11px] font-bold text-[#135C2F]">
+          {initials(business.name)}
+        </span>
+        <div className="min-w-0 flex-1">
+          <h2 className="truncate text-[15px] font-semibold text-[#172019]">{business.name}</h2>
+          <p className="mt-1 truncate text-[11px] text-[#7B867E]">{business.ownerName}</p>
         </div>
         <BusinessStatusBadge status={business.status} />
       </div>
 
-      <div className="mt-3 flex flex-wrap gap-2">
+      <div className="mt-4 flex flex-wrap gap-2">
         <BusinessCategoryBadge category={business.category} />
-        <span className="rounded-full bg-[#D6D979] px-2.5 py-1 text-xs font-semibold text-[#3E5902]">
+        <span className="rounded-full bg-[#E6F3C8] px-2.5 py-1 text-[10px] font-semibold text-[#42610A]">
           {business.commissionRate}% comisión
         </span>
       </div>
 
-      <p className="mt-4 text-sm leading-6 text-[#42493f]">{business.description}</p>
+      <p className="mt-4 line-clamp-3 text-[11px] leading-5 text-[#657068]">{business.description}</p>
 
-      <div className="mt-4 space-y-2 rounded-lg border border-[#e2e3dc] bg-[#f9faf3] p-3 text-sm text-[#42493f]">
-        <p className="flex items-center gap-2"><Phone className="h-4 w-4 text-[#4F7302]" />{business.phone}</p>
-        <p className="flex items-center gap-2"><Mail className="h-4 w-4 text-[#4F7302]" />{business.email}</p>
-        <p className="flex items-center gap-2"><MapPin className="h-4 w-4 text-[#4F7302]" />{business.location}</p>
+      <div className="mt-4 grid grid-cols-2 gap-3">
+        {[
+          ["Ventas mes", money.format(business.monthlySales)],
+          ["Liquidación", money.format(business.pendingPayout)],
+          ["Productos", String(business.activeProducts)],
+          ["Pedidos", String(business.pendingOrders)],
+        ].map(([label, value]) => (
+          <div key={label} className="rounded-[16px] border border-[#E5E9E2] bg-white p-3.5">
+            <p className="text-[10px] text-[#7F8A82]">{label}</p>
+            <p className="mt-1 text-[12px] font-semibold text-[#2D3931]">{value}</p>
+          </div>
+        ))}
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
-        <div className="rounded-lg border border-[#e2e3dc] bg-[#f9faf3] p-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.08em] text-[#73796e]">Ventas mes</p>
-          <p className="font-semibold text-[#1a1c18]">{money.format(business.monthlySales)}</p>
-        </div>
-        <div className="rounded-lg border border-[#e2e3dc] bg-[#f9faf3] p-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.08em] text-[#73796e]">Liquidación</p>
-          <p className="font-semibold text-[#1a1c18]">{money.format(business.pendingPayout)}</p>
-        </div>
-        <div className="rounded-lg border border-[#e2e3dc] bg-[#f9faf3] p-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.08em] text-[#73796e]">Productos</p>
-          <p className="font-semibold text-[#1a1c18]">{business.activeProducts}</p>
-        </div>
-        <div className="rounded-lg border border-[#e2e3dc] bg-[#f9faf3] p-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.08em] text-[#73796e]">Pedidos</p>
-          <p className="font-semibold text-[#1a1c18]">{business.pendingOrders}</p>
-        </div>
-      </div>
-
-      <div className="mt-4 rounded-lg border border-[#e2e3dc] bg-white p-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.08em] text-[#42493f]">Notas operativas</p>
-        <p className="mt-2 text-sm leading-5 text-[#42493f]">{business.notes}</p>
+      <div className="mt-4 rounded-[18px] bg-[#F2F6EE] p-4">
+        <p className="flex items-center gap-2 text-[10.5px] text-[#657068]"><Phone className="h-3.5 w-3.5 text-[#287839]" />{business.phone}</p>
+        <p className="mt-2 flex items-center gap-2 text-[10.5px] text-[#657068]"><Mail className="h-3.5 w-3.5 text-[#287839]" />{business.email}</p>
+        <p className="mt-2 flex items-center gap-2 text-[10.5px] text-[#657068]"><MapPin className="h-3.5 w-3.5 text-[#287839]" />{business.location}</p>
       </div>
 
       <div className="mt-4 flex flex-wrap gap-2">
-        {business.tags.map((tag) => (
-          <span key={tag} className="rounded-full bg-[#e8e9e2] px-2.5 py-1 text-xs font-semibold text-[#42493f]">
+        {business.tags.slice(0, 4).map((tag) => (
+          <span key={tag} className="rounded-full border border-[#DDE5D8] bg-white px-2.5 py-1 text-[9.5px] font-medium text-[#526057]">
             {tag.replaceAll("_", " ")}
           </span>
         ))}
       </div>
 
-      <div className="mt-4 rounded-lg border border-[#D6D979] bg-[#f9faf3] p-3 text-sm text-[#3E5902]">
-        {openTasks > 0 ? `${openTasks} tareas pendientes para estabilizar operación.` : "Operación lista para escalar pedidos."}
-        {activities[0] ? <p className="mt-1 text-xs text-[#42493f]">Última actividad: {activities[0].title} · {activities[0].date}</p> : null}
+      <div className="mt-4 rounded-[14px] bg-[#ECF5E8] px-3 py-2.5 text-[10px] leading-4 text-[#3F6948]">
+        <span className="inline-flex items-center gap-1.5 font-semibold"><Store className="h-3.5 w-3.5" />
+          {openTasks > 0 ? `${openTasks} tareas pendientes para estabilizar la operación.` : "Operación lista para escalar pedidos."}
+        </span>
+        {activities[0] ? <p className="mt-1 text-[#6E7B72]">Última actividad: {activities[0].title}</p> : null}
       </div>
     </section>
   );

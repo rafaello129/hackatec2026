@@ -19,7 +19,7 @@ import UrgentOrdersPanel from "./components/UrgentOrdersPanel";
 import { useProxyHome } from "./hooks/useProxyHome";
 
 const quickLinks = [
-  { label: "Ver emprendimientos", to: "/businesses", icon: Building2, helper: "Acompaña emprendimientos locales" },
+  { label: "Ver mi comunidad", to: "/businesses", icon: Building2, helper: "Acompaña emprendimientos locales" },
   { label: "Ver pedidos", to: "/orders", icon: ClipboardList, helper: "Revisa pedidos y entregas" },
   { label: "Ver productos", to: "/inventory", icon: Store, helper: "Controla stock por emprendimiento" },
   { label: "Ver mi dinero", to: "/finance/summary", icon: WalletCards, helper: "Ventas y liquidaciones" },
@@ -118,7 +118,7 @@ export default function HomePage() {
             to="/businesses"
             className="inline-flex shrink-0 items-center gap-2 self-start whitespace-nowrap text-[12px] font-bold uppercase tracking-[0.1em] text-white lg:self-center"
           >
-            Revisar emprendimientos
+            Revisar mi comunidad
             <ArrowRight className="h-6 w-6" />
           </Link>
         </div>

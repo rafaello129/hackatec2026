@@ -39,7 +39,7 @@ export default function InventoryPage() {
   const resolveItemName = (itemId: string) =>
     items.find((item) => item.id === itemId)?.name ?? "Item no identificado";
   const resolveItemBusiness = (itemId: string) =>
-    items.find((item) => item.id === itemId)?.businessName ?? "Negocio no identificado";
+    items.find((item) => item.id === itemId)?.businessName ?? "Emprendimiento no identificado";
 
   return (
     <div className="space-y-5 pb-5">
@@ -49,7 +49,7 @@ export default function InventoryPage() {
             Productos
           </h1>
           <p className="mt-2 text-[13px] text-[#657068]">
-            Revisa qué productos tienen stock, cuáles requieren atención y cómo se mueven entre tus negocios.
+            Revisa qué productos tienen stock, cuáles requieren atención y cómo se mueven entre tus emprendimientos.
           </p>
         </div>
 

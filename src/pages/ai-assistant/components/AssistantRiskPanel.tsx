@@ -2,10 +2,17 @@ import { AlertTriangle } from "lucide-react";
 import type { AssistantRiskAlert } from "@/types/assistant.types";
 
 const severityStyles: Record<AssistantRiskAlert["severity"], string> = {
-  info: "border-[#c2c9bc] bg-white",
-  success: "border-[#D6D979] bg-[#f9faf3]",
-  warning: "border-[#e3d279] bg-[#fffdf5]",
-  critical: "border-[#f2c5bf] bg-[#fff8f6]",
+  info: "border-[#E1E6DE] bg-white",
+  success: "border-[#D7E7D2] bg-[#EAF4E6]",
+  warning: "border-[#F0D992] bg-[#FFF4D8]",
+  critical: "border-[#F0CFCB] bg-[#FDF0EE]",
+};
+
+const iconStyles: Record<AssistantRiskAlert["severity"], string> = {
+  info: "bg-[#F0F2ED] text-[#667169]",
+  success: "bg-white text-[#2F873A]",
+  warning: "bg-white text-[#986900]",
+  critical: "bg-white text-[#D9564D]",
 };
 
 const moduleLabels: Record<AssistantRiskAlert["module"], string> = {
@@ -18,27 +25,41 @@ const moduleLabels: Record<AssistantRiskAlert["module"], string> = {
 
 export default function AssistantRiskPanel({ risks }: { risks: AssistantRiskAlert[] }) {
   return (
-    <section className="rounded-lg border border-[#c2c9bc] bg-white p-4">
-      <div className="mb-3 flex items-center justify-between gap-3">
-        <h2 className="font-['Hanken_Grotesk'] text-lg font-semibold text-[#1a1c18]">Riesgos detectados</h2>
-        <span className="rounded-full bg-[#f3f4ed] px-2 py-1 text-xs font-semibold text-[#42493f]">
+    <section className="rounded-[24px] border border-[#E1E6DE] bg-white p-5">
+      <div className="mb-4 flex items-center justify-between gap-3">
+        <div>
+          <p className="text-[9px] font-semibold uppercase tracking-[0.1em] text-[#7A867E]">
+            Atención
+          </p>
+          <h2 className="mt-1 font-['Hanken_Grotesk'] text-[16px] font-semibold text-[#17231B]">
+            Riesgos detectados
+          </h2>
+        </div>
+        <span className="rounded-full bg-[#F2F4F0] px-2.5 py-1 text-[9px] font-semibold text-[#667169]">
           {risks.length} señales
         </span>
       </div>
+
       <div className="space-y-2.5">
         {risks.slice(0, 2).map((risk) => (
-          <article key={risk.id} className={`rounded-lg border p-3 ${severityStyles[risk.severity]}`}>
-            <div className="flex items-start gap-2">
-              <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-[#8b2e2e]" />
-              <div className="min-w-0">
+          <article key={risk.id} className={`rounded-[17px] border p-3.5 ${severityStyles[risk.severity]}`}>
+            <div className="flex items-start gap-3">
+              <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-[11px] ${iconStyles[risk.severity]}`}>
+                <AlertTriangle className="h-4 w-4" />
+              </span>
+              <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
-                  <p className="line-clamp-1 text-sm font-semibold text-[#1a1c18]">{risk.title}</p>
-                  <span className="rounded-full bg-white px-2 py-0.5 text-xs font-semibold text-[#3E5902]">
+                  <p className="line-clamp-2 text-[11px] font-semibold leading-4 text-[#17231B]">
+                    {risk.title}
+                  </p>
+                  <span className="rounded-full bg-white/85 px-2 py-0.5 text-[9px] font-semibold text-[#135C2F]">
                     {moduleLabels[risk.module]}
                   </span>
                 </div>
-                <p className="mt-1 line-clamp-2 text-xs leading-5 text-[#42493f]">{risk.description}</p>
-                <p className="mt-2 line-clamp-2 rounded-md bg-white p-2 text-xs font-semibold leading-5 text-[#3E5902]">
+                <p className="mt-1.5 line-clamp-2 text-[10px] leading-4 text-[#637067]">
+                  {risk.description}
+                </p>
+                <p className="mt-2 rounded-[11px] bg-white/80 px-2.5 py-2 text-[9px] font-semibold leading-4 text-[#496050]">
                   Recomendación: {risk.recommendation}
                 </p>
               </div>

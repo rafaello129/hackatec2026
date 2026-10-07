@@ -23,21 +23,44 @@ export default function AssistantChatPanel({
   onRunAction,
 }: AssistantChatPanelProps) {
   return (
-    <section className="min-w-0 rounded-lg border border-[#c2c9bc] bg-white">
-      <header className="flex flex-col gap-1 border-b border-[#e2e3dc] px-4 py-3">
-        <h2 className="font-['Hanken_Grotesk'] text-lg font-semibold text-[#1a1c18]">Conversación ejecutiva</h2>
-        <p className="text-sm text-[#42493f]">Consulta señales operativas y recibe recomendaciones accionables.</p>
+    <section className="min-w-0 overflow-hidden rounded-[28px] border border-[#E1E6DE] bg-white transition-shadow duration-300 hover:shadow-[0_16px_42px_rgba(23,35,27,0.05)]">
+      <header className="flex flex-col gap-1 border-b border-[#EDF0EB] px-5 py-5 sm:px-6">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.09em] text-[#135C2F]">
+          Conversación
+        </p>
+        <h2 className="font-['Hanken_Grotesk'] text-[18px] font-semibold text-[#17231B]">
+          Conversación ejecutiva
+        </h2>
+        <p className="text-[11px] leading-5 text-[#68736B]">
+          Consulta señales operativas y recibe recomendaciones accionables.
+        </p>
       </header>
 
-      <div className="space-y-4 p-4">
+      <div className="space-y-4 p-4 sm:p-5">
         <AssistantMessageList messages={messages} isLoading={isLoading} />
-        <AssistantComposer value={inputValue} onChange={onInputChange} onSend={onSendMessage} isLoading={isLoading} />
-        <div className="rounded-lg border border-[#e2e3dc] bg-[#f9faf3] p-3">
-          <div className="mb-3 flex items-center justify-between gap-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.08em] text-[#42493f]">Acciones rápidas</p>
-            <span className="text-xs font-medium text-[#73796e]">Pulsa para generar consulta</span>
+
+        <AssistantComposer
+          value={inputValue}
+          onChange={onInputChange}
+          onSend={onSendMessage}
+          isLoading={isLoading}
+        />
+
+        <div className="rounded-[20px] border border-[#E7EBE4] bg-[#F7F9F5] p-4">
+          <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-[#5D6A61]">
+              Acciones rápidas
+            </p>
+            <span className="text-[10px] font-medium text-[#89938C]">
+              Pulsa para generar consulta
+            </span>
           </div>
-          <AssistantQuickActions actions={quickActions} onRunAction={onRunAction} disabled={isLoading} />
+
+          <AssistantQuickActions
+            actions={quickActions}
+            onRunAction={onRunAction}
+            disabled={isLoading}
+          />
         </div>
       </div>
     </section>

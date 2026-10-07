@@ -20,10 +20,10 @@ export default function AIAssistantPage() {
   } = useAssistant();
 
   return (
-    <div className="w-full max-w-full space-y-5 overflow-hidden">
+    <div className="w-full max-w-full space-y-5 overflow-hidden pb-5">
       <AssistantHeader />
 
-      <div className="grid w-full max-w-full gap-4 xl:grid-cols-[minmax(0,1fr)_340px] xl:items-start">
+      <div className="grid w-full max-w-full items-start gap-4 xl:grid-cols-[minmax(0,1fr)_360px]">
         <AssistantChatPanel
           messages={messages}
           inputValue={inputValue}

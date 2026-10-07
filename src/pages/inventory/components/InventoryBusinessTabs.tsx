@@ -25,7 +25,7 @@ export default function InventoryBusinessTabs({
 }) {
   return (
     <div className="max-w-full overflow-x-auto pb-1">
-      <div className="flex min-w-max gap-2" aria-label="Filtrar productos por negocio">
+      <div className="flex min-w-max gap-2" aria-label="Filtrar productos por emprendimiento">
         {businesses.map((business) => {
           const active = activeBusinessId === business.id;
           return (

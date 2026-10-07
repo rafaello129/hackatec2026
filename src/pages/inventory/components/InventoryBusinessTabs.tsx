@@ -10,9 +10,9 @@ interface InventoryBusinessOption {
 
 const shortName = (name: string) =>
   name
-    .replace("AgroNorte Distribution", "AgroNorte")
-    .replace("BioPack Peninsula", "BioPack")
-    .replace("Nativa Beauty Supply", "Nativa Beauty");
+    .replace("Milpa del Caribe", "Milpa del Caribe")
+    .replace("EcoEmpaque Caribe", "BioPack")
+    .replace("Herbolaria Nativa", "Nativa Beauty");
 
 export default function InventoryBusinessTabs({
   businesses,

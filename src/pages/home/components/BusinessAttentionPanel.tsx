@@ -30,7 +30,7 @@ export default function BusinessAttentionPanel({
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#7D8B81]">Estado de la red</p>
-          <h2 className="mt-1 text-lg font-semibold text-[#17231B]">Emprendimientos con atención</h2>
+          <h2 className="mt-1 text-lg font-semibold text-[#17231B]">Mi comunidad requiere atención</h2>
           <p className="mt-1 text-[11px] leading-5 text-[#7B867E]">Señales que requieren seguimiento operativo.</p>
         </div>
         <Link to="/businesses" className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#287839]">

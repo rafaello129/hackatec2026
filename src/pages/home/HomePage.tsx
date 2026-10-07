@@ -35,10 +35,17 @@ function HomeSkeleton() {
           <div key={item} className="h-36 rounded-[24px] bg-[#F3F3EE]" />
         ))}
       </div>
-      <div className="space-y-5">
-        <div className="h-64 rounded-[24px] bg-[#F3F3EE]" />
-        <div className="h-64 rounded-[24px] bg-[#F3F3EE]" />
-        <div className="h-64 rounded-[24px] bg-[#F3F3EE]" />
+      <div className="grid gap-5 xl:grid-cols-[1.55fr_1fr]">
+        <div className="space-y-5">
+          <div className="h-64 rounded-[24px] bg-[#F3F3EE]" />
+          <div className="h-64 rounded-[24px] bg-[#F3F3EE]" />
+          <div className="h-64 rounded-[24px] bg-[#F3F3EE]" />
+        </div>
+        <div className="space-y-5">
+          <div className="h-56 rounded-[24px] bg-[#F3F3EE]" />
+          <div className="h-56 rounded-[24px] bg-[#F3F3EE]" />
+          <div className="h-56 rounded-[24px] bg-[#F3F3EE]" />
+        </div>
       </div>
     </div>
   );
@@ -119,13 +126,18 @@ export default function HomePage() {
 
       <ProxyHomeKpiCards kpis={kpis} />
 
-      <section className="space-y-5">
-        <UrgentOrdersPanel orders={urgentOrders} formatCurrency={formatCurrency} formatDate={formatDate} />
-        <BusinessAttentionPanel businesses={businessesNeedingAttention} formatCurrency={formatCurrency} />
-        <CriticalInventoryPanel items={criticalInventory} />
-        <PendingPayoutsPanel payouts={pendingPayouts} formatCurrency={formatCurrency} formatDate={formatDate} />
-        <HomeOperationsTimeline items={activityTimeline} formatDate={formatDate} />
-        <ProxyAssistantPanel recommendations={recommendations} />
+      <section className="grid items-start gap-5 xl:grid-cols-[1.55fr_1fr]">
+        <div className="min-w-0 space-y-5">
+          <UrgentOrdersPanel orders={urgentOrders} formatCurrency={formatCurrency} formatDate={formatDate} />
+          <CriticalInventoryPanel items={criticalInventory} />
+          <HomeOperationsTimeline items={activityTimeline} formatDate={formatDate} />
+        </div>
+
+        <div className="min-w-0 space-y-5">
+          <BusinessAttentionPanel businesses={businessesNeedingAttention} formatCurrency={formatCurrency} />
+          <PendingPayoutsPanel payouts={pendingPayouts} formatCurrency={formatCurrency} formatDate={formatDate} />
+          <ProxyAssistantPanel recommendations={recommendations} />
+        </div>
       </section>
 
       <section className="rounded-[24px] border border-[#E2E6DF] bg-white p-6 sm:p-7">

@@ -24,7 +24,7 @@ export default function FinanceSummaryPage() {
             Mi dinero
           </h1>
           <p className="mt-2 text-[13px] text-[#657068]">
-            Entiende cómo se mueve el dinero de los negocios que administras.
+            Entiende cómo se mueve el dinero de los emprendimientos que administras.
           </p>
         </div>
 

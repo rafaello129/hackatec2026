@@ -46,7 +46,7 @@ export default function BusinessFilters({
                 : option.value === "needs_attention"
                   ? "Atención"
                   : option.value === "onboarding"
-                    ? "Onboarding"
+                    ? "Incorporación"
                     : option.label;
 
             return (

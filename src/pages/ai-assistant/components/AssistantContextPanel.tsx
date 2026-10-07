@@ -32,7 +32,7 @@ export default function AssistantContextPanel({
           Contexto
         </p>
         <h2 className="mt-1 font-['Hanken_Grotesk'] text-[17px] font-semibold text-white">
-          Contexto del negocio
+          Contexto del emprendimiento
         </h2>
       </div>
 

@@ -35,9 +35,10 @@ function HomeSkeleton() {
           <div key={item} className="h-36 rounded-[24px] bg-[#F3F3EE]" />
         ))}
       </div>
-      <div className="grid gap-5 xl:grid-cols-[1.6fr_1fr]">
-        <div className="h-80 rounded-[24px] bg-[#F3F3EE]" />
-        <div className="h-80 rounded-[24px] bg-[#F3F3EE]" />
+      <div className="space-y-5">
+        <div className="h-64 rounded-[24px] bg-[#F3F3EE]" />
+        <div className="h-64 rounded-[24px] bg-[#F3F3EE]" />
+        <div className="h-64 rounded-[24px] bg-[#F3F3EE]" />
       </div>
     </div>
   );
@@ -118,17 +119,11 @@ export default function HomePage() {
 
       <ProxyHomeKpiCards kpis={kpis} />
 
-      <section className="grid items-start gap-5 xl:grid-cols-[1.55fr_1fr]">
+      <section className="space-y-5">
         <UrgentOrdersPanel orders={urgentOrders} formatCurrency={formatCurrency} formatDate={formatDate} />
         <BusinessAttentionPanel businesses={businessesNeedingAttention} formatCurrency={formatCurrency} />
-      </section>
-
-      <section className="grid items-start gap-5 xl:grid-cols-[1.55fr_1fr]">
         <CriticalInventoryPanel items={criticalInventory} />
         <PendingPayoutsPanel payouts={pendingPayouts} formatCurrency={formatCurrency} formatDate={formatDate} />
-      </section>
-
-      <section className="grid items-start gap-5 xl:grid-cols-[1.55fr_1fr]">
         <HomeOperationsTimeline items={activityTimeline} formatDate={formatDate} />
         <ProxyAssistantPanel recommendations={recommendations} />
       </section>

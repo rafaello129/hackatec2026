@@ -8,20 +8,20 @@ import type {
 
 export const businessProfileMock: BusinessProfile = {
   id: "profile-peek",
-  companyName: "péek Organic Enterprise",
+  companyName: "MÁAK",
   industry: "sustainable_technology",
-  website: "peek-organic.com",
+  website: "maak.com",
   description:
     "Plataforma empresarial para coordinar clientes, inventario, finanzas y oportunidades cooperativas entre negocios aliados.",
-  logoUrl: `${import.meta.env.BASE_URL}Vector.svg`,
-  logoAlt: "Logo de péek Organic Enterprise",
+  logoUrl: `${import.meta.env.BASE_URL}brand/maak-logo.svg`,
+  logoAlt: "Logo de MÁAK",
 };
 
 export const teamMembersMock: TeamMember[] = [
   {
     id: "team-001",
     name: "Marcus Thorne",
-    email: "m.thorne@peek.com",
+    email: "m.thorne@maak.com",
     role: "owner",
     status: "active",
     avatarUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80",
@@ -29,7 +29,7 @@ export const teamMembersMock: TeamMember[] = [
   {
     id: "team-002",
     name: "Elena Rodriguez",
-    email: "elena.r@peek.com",
+    email: "elena.r@maak.com",
     role: "admin",
     status: "active",
     avatarUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80",
@@ -37,7 +37,7 @@ export const teamMembersMock: TeamMember[] = [
   {
     id: "team-003",
     name: "Samual Kim",
-    email: "s.kim@peek.com",
+    email: "s.kim@maak.com",
     role: "editor",
     status: "active",
     avatarUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=120&q=80",

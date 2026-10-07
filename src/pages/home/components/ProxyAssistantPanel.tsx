@@ -7,7 +7,7 @@ export default function ProxyAssistantPanel({ recommendations }: { recommendatio
     <section className="rounded-[24px] border border-[#DDE4D8] bg-[linear-gradient(145deg,#FFFFFF_0%,#FBFCF8_58%,#F1F7E9_100%)] p-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#7D8B81]">Asistente PÉEK</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#7D8B81]">Asistente MÁAK</p>
           <h2 className="mt-1 text-lg font-semibold text-[#17231B]">Recomendaciones IA</h2>
           <p className="mt-1 text-[11px] leading-5 text-[#7B867E]">Prioridades sugeridas a partir de la operación simulada.</p>
         </div>

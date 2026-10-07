@@ -85,20 +85,12 @@ function SidebarItem({
 function Sidebar({ closeMobile }: { closeMobile?: () => void }) {
   return (
     <div className="peek-sidebar flex h-full flex-col px-4 pb-5 pt-7">
-      <div className="mb-3 flex h-12 items-center gap-2.5">
-        <span className="grid h-[34px] w-[34px] place-items-center rounded-[10px] bg-[#9AC84B]">
-          <img
-            src={import.meta.env.BASE_URL + "Vector.svg"}
-            alt=""
-            className="h-5 w-5 object-contain brightness-0"
-          />
-        </span>
-        <div className="leading-none">
-          <p className="text-[18px] font-bold text-white">PÉEK</p>
-          <p className="mt-1 text-[10px] font-medium uppercase tracking-[0.08em] text-white/75">
-            Mi negocio
-          </p>
-        </div>
+      <div className="mb-4 flex h-12 items-center px-1">
+        <img
+          src={import.meta.env.BASE_URL + "brand/maak-logo-white.svg"}
+          alt="MÁAK"
+          className="h-8 w-auto max-w-[154px] object-contain"
+        />
       </div>
 
       <nav className="space-y-1">

@@ -31,7 +31,7 @@ export default function InventoryTable({
     return (
       <div className="rounded-[18px] border border-dashed border-[#DDE4D9] bg-[#F8FAF6] px-5 py-10 text-center">
         <p className="text-sm font-semibold text-[#344039]">No encontramos productos con estos filtros.</p>
-        <p className="mt-1 text-[11px] text-[#7E8981]">Prueba con otro nombre, negocio, categoría o estado.</p>
+        <p className="mt-1 text-[11px] text-[#7E8981]">Prueba con otro nombre, emprendimiento, categoría o estado.</p>
       </div>
     );
   }
@@ -43,7 +43,7 @@ export default function InventoryTable({
           <thead className="bg-[linear-gradient(90deg,#F4F8F1_0%,#FAFBF8_100%)]">
             <tr className="text-[10px] font-semibold uppercase tracking-[0.055em] text-[#718078]">
               <th className="w-[38%] px-4 py-3.5">Producto</th>
-              <th className="w-[22%] px-3 py-3.5">Negocio</th>
+              <th className="w-[22%] px-3 py-3.5">Emprendimiento</th>
               <th className="w-[16%] px-3 py-3.5">Disponibles</th>
               <th className="w-[14%] px-3 py-3.5">Estado</th>
               <th className="w-[10%] px-4 py-3.5" />

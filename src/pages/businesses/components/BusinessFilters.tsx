@@ -31,7 +31,7 @@ export default function BusinessFilters({
         <input
           value={searchText}
           onChange={(event) => onSearchTextChange(event.target.value)}
-          placeholder="Buscar por emprendimiento, propietario, ubicación o etiqueta..."
+          placeholder="Buscar por emprendimiento, responsable, ubicación o etiqueta..."
           className="h-11 w-full rounded-full border border-transparent bg-[#F6F7F2] pl-11 pr-4 text-[12px] text-[#263129] outline-none transition placeholder:text-[#89938C] focus:border-[#CAD7C5] focus:bg-white focus:ring-2 focus:ring-[#9AC84B]/15"
         />
       </label>

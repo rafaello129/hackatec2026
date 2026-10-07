@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Building2, ClipboardList, Plus, Store, WalletCards } from "lucide-react";
-import PageIntro from "@/components/common/PageIntro";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Building2,
+  CalendarDays,
+  ClipboardList,
+  Package,
+  Store,
+  WalletCards,
+} from "lucide-react";
 import BusinessAttentionPanel from "./components/BusinessAttentionPanel";
 import CriticalInventoryPanel from "./components/CriticalInventoryPanel";
 import HomeOperationsTimeline from "./components/HomeOperationsTimeline";
@@ -11,11 +19,29 @@ import UrgentOrdersPanel from "./components/UrgentOrdersPanel";
 import { useProxyHome } from "./hooks/useProxyHome";
 
 const quickLinks = [
-  { label: "Ver negocios", to: "/businesses", icon: Building2 },
-  { label: "Ver pedidos", to: "/orders", icon: ClipboardList },
-  { label: "Ver inventario", to: "/inventory", icon: Store },
-  { label: "Ver finanzas", to: "/finance/summary", icon: WalletCards },
+  { label: "Ver negocios", to: "/businesses", icon: Building2, helper: "Gestiona negocios aliados" },
+  { label: "Ver pedidos", to: "/orders", icon: ClipboardList, helper: "Revisa pedidos y entregas" },
+  { label: "Ver productos", to: "/inventory", icon: Store, helper: "Controla stock por negocio" },
+  { label: "Ver mi dinero", to: "/finance/summary", icon: WalletCards, helper: "Ventas y liquidaciones" },
 ];
+
+function HomeSkeleton() {
+  return (
+    <div className="animate-pulse space-y-5">
+      <div className="h-16 rounded-2xl bg-[#EEF1EB]" />
+      <div className="h-24 rounded-[20px] bg-[#E8EEE5]" />
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+        {[0, 1, 2, 3, 4].map((item) => (
+          <div key={item} className="h-36 rounded-[24px] bg-[#F3F3EE]" />
+        ))}
+      </div>
+      <div className="grid gap-5 xl:grid-cols-[1.6fr_1fr]">
+        <div className="h-80 rounded-[24px] bg-[#F3F3EE]" />
+        <div className="h-80 rounded-[24px] bg-[#F3F3EE]" />
+      </div>
+    </div>
+  );
+}
 
 export default function HomePage() {
   const {
@@ -31,81 +57,117 @@ export default function HomePage() {
     formatDate,
   } = useProxyHome();
 
+  if (isLoading) return <HomeSkeleton />;
+
   return (
-    <div className="w-full max-w-full space-y-5 overflow-hidden">
-      <PageIntro
-        title="Panel del intermediario"
-        description="Administra negocios aliados, pedidos, inventario y liquidaciones desde una sola operacion."
-        actions={
-          <>
-            <Link
-              to="/businesses"
-              className="inline-flex items-center gap-2 rounded-lg border border-[#c2c9bc] bg-white px-4 py-2 text-sm font-semibold text-[#1a1c18] hover:bg-[#f3f4ed]"
-            >
-              <Building2 className="h-4 w-4" />
-              Agregar negocio
-            </Link>
-            <Link
-              to="/orders"
-              className="inline-flex items-center gap-2 rounded-lg bg-[#4F7302] px-4 py-2 text-sm font-semibold text-white hover:bg-[#3E5902]"
-            >
-              <Plus className="h-4 w-4" />
-              Nuevo pedido
-            </Link>
-          </>
-        }
-      />
+    <div className="space-y-5 pb-4">
+      <section className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h1 className="text-[34px] font-bold leading-tight text-[#17231B] sm:text-[40px]">
+            Panel del intermediario
+          </h1>
+          <p className="mt-1 text-sm text-[#68736B]">
+            Aquí tienes un resumen de la operación de tus negocios hoy
+          </p>
+        </div>
 
-      {isLoading ? (
-        <div className="rounded-lg border border-[#c2c9bc] bg-white p-6 text-sm text-[#42493f]">Cargando operacion...</div>
-      ) : (
-        <>
-          <ProxyHomeKpiCards kpis={kpis} />
+        <span className="inline-flex h-10 w-fit items-center gap-2 rounded-xl border border-[#DFE4DA] bg-white px-4 text-xs font-medium text-[#425047]">
+          <CalendarDays className="h-4 w-4" />
+          Resumen operativo
+        </span>
+      </section>
 
-          <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_340px] xl:items-start">
-            <main className="min-w-0 space-y-4">
-              <UrgentOrdersPanel orders={urgentOrders} formatCurrency={formatCurrency} formatDate={formatDate} />
-              <CriticalInventoryPanel items={criticalInventory} />
-              <HomeOperationsTimeline items={activityTimeline} formatDate={formatDate} />
-            </main>
+      <section className="peek-dark-surface w-full overflow-hidden rounded-[20px] bg-[#022601] px-[22px] py-[21px] text-white">
+        <div className="flex min-h-[55px] w-full flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-center sm:gap-[23px]">
+            <div className="flex h-[54px] w-[109px] shrink-0 -space-x-[27px]" aria-hidden="true">
+              {[
+                "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=220&h=220&q=82",
+                "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=220&h=220&q=82",
+                "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=220&h=220&q=82",
+              ].map((src, index) => (
+                <div
+                  key={src}
+                  className="relative h-[54px] w-[54px] shrink-0 overflow-hidden rounded-full border-2 border-[#B6E251] bg-[#E6ECE8] shadow-[0_4px_14px_rgba(0,0,0,0.18)]"
+                  style={{ zIndex: index + 1 }}
+                >
+                  <img src={src} alt="" className="h-full w-full object-cover" loading="lazy" />
+                </div>
+              ))}
+            </div>
 
-            <aside className="min-w-0 space-y-4">
-              <BusinessAttentionPanel businesses={businessesNeedingAttention} formatCurrency={formatCurrency} />
-              <PendingPayoutsPanel payouts={pendingPayouts} formatCurrency={formatCurrency} formatDate={formatDate} />
-              <ProxyAssistantPanel recommendations={recommendations} />
-            </aside>
+            <div className="min-w-0">
+              <h2 className="text-[20px] font-black leading-none tracking-[0.045em] text-white">
+                Mantén cada negocio en movimiento
+              </h2>
+              <p className="mt-2 max-w-[760px] text-[14px] font-bold leading-[1.2] tracking-[0.025em] text-white">
+                Centraliza pedidos, inventario, ventas y liquidaciones para reaccionar antes de que una operación se detenga.
+              </p>
+            </div>
           </div>
 
-          <section className="rounded-lg border border-[#c2c9bc] bg-white p-4">
-            <div className="mb-3 flex items-center justify-between gap-2">
-              <h2 className="font-['Hanken_Grotesk'] text-lg font-semibold text-[#1a1c18]">Accesos rapidos</h2>
-              <span className="rounded-full bg-[#D6D979] px-2.5 py-1 text-xs font-semibold text-[#3E5902]">
-                Operacion Intermediario
-              </span>
-            </div>
-            <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-              {quickLinks.map((link) => {
-                const Icon = link.icon;
-                return (
-                  <Link
-                    key={link.to}
-                    to={link.to}
-                    className="group flex items-center justify-between rounded-lg border border-[#e2e3dc] bg-[#f9faf3] p-3 text-sm font-semibold text-[#1a1c18] hover:border-[#799833] hover:bg-[#f3f4ed]"
-                  >
-                    <span className="inline-flex items-center gap-2">
-                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-white text-[#4F7302]">
-                        <Icon className="h-4 w-4" />
-                      </span>
-                      {link.label}
-                    </span>
-                    <ArrowUpRight className="h-4 w-4 text-[#799833] transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </Link>
-                );
-              })}
-            </div>
-          </section>
-        </>
-      )}
+          <Link
+            to="/businesses"
+            className="inline-flex shrink-0 items-center gap-2 self-start whitespace-nowrap text-[12px] font-bold uppercase tracking-[0.1em] text-white lg:self-center"
+          >
+            Revisar negocios
+            <ArrowRight className="h-6 w-6" />
+          </Link>
+        </div>
+      </section>
+
+      <ProxyHomeKpiCards kpis={kpis} />
+
+      <section className="grid items-start gap-5 xl:grid-cols-[1.55fr_1fr]">
+        <UrgentOrdersPanel orders={urgentOrders} formatCurrency={formatCurrency} formatDate={formatDate} />
+        <BusinessAttentionPanel businesses={businessesNeedingAttention} formatCurrency={formatCurrency} />
+      </section>
+
+      <section className="grid items-start gap-5 xl:grid-cols-[1.55fr_1fr]">
+        <CriticalInventoryPanel items={criticalInventory} />
+        <PendingPayoutsPanel payouts={pendingPayouts} formatCurrency={formatCurrency} formatDate={formatDate} />
+      </section>
+
+      <section className="grid items-start gap-5 xl:grid-cols-[1.55fr_1fr]">
+        <HomeOperationsTimeline items={activityTimeline} formatDate={formatDate} />
+        <ProxyAssistantPanel recommendations={recommendations} />
+      </section>
+
+      <section className="rounded-[24px] border border-[#E2E6DF] bg-white p-6 sm:p-7">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h2 className="text-base font-semibold text-[#17231B]">Accesos rápidos</h2>
+            <p className="mt-1 text-[11px] text-[#87918A]">
+              Entra directo a las áreas que concentran la operación diaria.
+            </p>
+          </div>
+          <span className="rounded-full bg-[#E6F3C8] px-2.5 py-1 text-[10px] font-semibold text-[#42610A]">
+            Operación central
+          </span>
+        </div>
+
+        <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+          {quickLinks.map((link) => {
+            const Icon = link.icon;
+            return (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="group flex min-h-[94px] items-center gap-3 rounded-[18px] border border-transparent bg-[#FAFAF7] p-4 transition hover:-translate-y-0.5 hover:border-[#DDE6D8] hover:bg-white"
+              >
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#EDF4E8] text-[#2E7439]">
+                  <Icon className="h-5 w-5" />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <strong className="block text-[13px] font-semibold text-[#344039]">{link.label}</strong>
+                  <small className="mt-1 block text-[10px] leading-4 text-[#87918A]">{link.helper}</small>
+                </span>
+                <ArrowUpRight className="h-4 w-4 shrink-0 text-[#98A29B] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+            );
+          })}
+        </div>
+      </section>
     </div>
   );
 }

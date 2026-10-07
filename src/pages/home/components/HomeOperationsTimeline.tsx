@@ -1,47 +1,51 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Circle } from "lucide-react";
-import SectionCard from "@/components/common/SectionCard";
+import { ArrowRight, Circle } from "lucide-react";
 import type { HomeTimelineItem } from "../hooks/useProxyHome";
 
-interface HomeOperationsTimelineProps {
-  items: HomeTimelineItem[];
-  formatDate: (dateISO: string) => string;
-}
-
 const sourceClass: Record<HomeTimelineItem["source"], string> = {
-  Negocios: "bg-[#D6D979] text-[#3E5902]",
-  Pedidos: "bg-[#fff2cc] text-[#7a5d00]",
-  Inventario: "bg-[#e8e9e2] text-[#42493f]",
+  Negocios: "bg-[#E6F3C8] text-[#42610A]",
+  Pedidos: "bg-[#FFF0D8] text-[#8C6213]",
+  Inventario: "bg-[#EEF2EA] text-[#607064]",
 };
 
-export default function HomeOperationsTimeline({ items, formatDate }: HomeOperationsTimelineProps) {
+export default function HomeOperationsTimeline({
+  items,
+  formatDate,
+}: {
+  items: HomeTimelineItem[];
+  formatDate: (dateISO: string) => string;
+}) {
   return (
-    <SectionCard
-      title="Timeline operativo"
-      actions={
-        <Link to="/businesses" className="inline-flex items-center gap-1 text-sm font-semibold text-[#4F7302] hover:text-[#3E5902]">
-          Operacion
-          <ArrowUpRight className="h-4 w-4" />
+    <section className="rounded-[24px] border border-[#E2E6DF] bg-white p-6 sm:p-7">
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h2 className="text-base font-semibold text-[#17231B]">Actividad reciente</h2>
+          <p className="mt-1 text-[11px] text-[#87918A]">Movimientos recientes de negocios, pedidos e inventario.</p>
+        </div>
+        <Link to="/businesses" className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#287839]">
+          Operación <ArrowRight className="h-3.5 w-3.5" />
         </Link>
-      }
-    >
-      <ol className="space-y-3">
-        {items.map((item) => (
-          <li key={item.id} className="grid grid-cols-[auto_minmax(0,1fr)] gap-3">
-            <span className="mt-1 inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#f3f4ed] text-[#4F7302]">
+      </div>
+
+      <ol className="mt-5 grid gap-x-8 md:grid-cols-2">
+        {items.slice(0, 6).map((item) => (
+          <li key={item.id} className="flex items-center gap-3 border-b border-[#EEF0EB] py-3.5 first:pt-0">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#EDF4E8] text-[#2E7439]">
               <Circle className="h-3 w-3 fill-current" />
             </span>
-            <div className="min-w-0 rounded-lg border border-[#e2e3dc] bg-[#f9faf3] p-3">
-              <div className="mb-1 flex items-center justify-between gap-2">
-                <p className="truncate text-sm font-semibold text-[#1a1c18]">{item.title}</p>
-                <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${sourceClass[item.source]}`}>{item.source}</span>
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2">
+                <p className="truncate text-xs font-semibold text-[#344039]">{item.title}</p>
+                <span className={`shrink-0 rounded-full px-2 py-0.5 text-[9px] font-semibold ${sourceClass[item.source]}`}>
+                  {item.source}
+                </span>
               </div>
-              <p className="line-clamp-2 text-xs leading-5 text-[#42493f]">{item.description}</p>
-              <p className="mt-1 text-xs text-[#42493f]">{formatDate(item.date)}</p>
+              <p className="mt-0.5 line-clamp-1 text-[10.5px] text-[#838C86]">{item.description}</p>
+              <p className="mt-1 text-[9.5px] text-[#919A94]">{formatDate(item.date)}</p>
             </div>
           </li>
         ))}
       </ol>
-    </SectionCard>
+    </section>
   );
 }

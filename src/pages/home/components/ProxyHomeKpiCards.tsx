@@ -9,32 +9,57 @@ const iconMap: Record<string, typeof Building2> = {
   estimated_commission: ReceiptText,
 };
 
-const toneMap: Record<ProxyHomeKpi["tone"], string> = {
-  success: "text-[#4F7302]",
-  warning: "text-[#7a5d00]",
-  neutral: "text-[#799833]",
-};
+const order = [
+  "managed_sales",
+  "active_businesses",
+  "pending_orders",
+  "pending_payouts",
+  "estimated_commission",
+];
 
 interface ProxyHomeKpiCardsProps {
   kpis: ProxyHomeKpi[];
 }
 
 export default function ProxyHomeKpiCards({ kpis }: ProxyHomeKpiCardsProps) {
+  const ordered = order
+    .map((id) => kpis.find((kpi) => kpi.id === id))
+    .filter((kpi): kpi is ProxyHomeKpi => Boolean(kpi));
+
   return (
-    <div className="grid gap-4 md:grid-cols-2 2xl:grid-cols-5">
-      {kpis.map((kpi) => {
+    <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+      {ordered.map((kpi, index) => {
         const Icon = iconMap[kpi.id] ?? Building2;
+        const featured = index === 0;
+
         return (
-          <article key={kpi.id} className="rounded-lg border border-[#c2c9bc] bg-white p-4">
-            <div className="flex items-start justify-between gap-2">
-              <p className="text-xs font-semibold uppercase tracking-[0.08em] text-[#42493f]">{kpi.label}</p>
-              <Icon className={`h-4 w-4 ${toneMap[kpi.tone]}`} />
+          <article
+            key={kpi.id}
+            className={
+              featured
+                ? "peek-dark-surface group min-h-[142px] rounded-[24px] bg-[linear-gradient(135deg,#063A12_0%,#0D571E_58%,#9AC84B_140%)] p-5 text-white transition-transform duration-200 hover:-translate-y-0.5"
+                : "group min-h-[142px] rounded-[24px] bg-[#FFF8F6] p-5 ring-1 ring-[#F0ECE8] transition duration-200 hover:-translate-y-0.5 hover:ring-[#DDE5D8]"
+            }
+          >
+            <div className="flex items-start justify-between gap-3">
+              <p className={featured ? "text-[15px] text-white" : "text-[15px] text-[#35523B]"}>{kpi.label}</p>
+              <Icon className={featured ? "h-5 w-5 text-white" : "h-5 w-5 text-[#6E8A73]"} />
             </div>
-            <p className="mt-2 font-['Hanken_Grotesk'] text-3xl font-bold text-[#1a1c18]">{kpi.value}</p>
-            <p className="mt-1 text-sm text-[#42493f]">{kpi.hint}</p>
+            <p
+              className={
+                featured
+                  ? "mt-3 text-[34px] font-medium leading-none tracking-[-0.04em] text-white"
+                  : "mt-3 text-[34px] font-medium leading-none tracking-[-0.04em] text-[#35523B]"
+              }
+            >
+              {kpi.value}
+            </p>
+            <p className={featured ? "mt-3 text-[11px] leading-4 text-white/75" : "mt-3 text-[11px] leading-4 text-[#758178]"}>
+              {kpi.hint}
+            </p>
           </article>
         );
       })}
-    </div>
+    </section>
   );
 }

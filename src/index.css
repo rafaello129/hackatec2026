@@ -96,3 +96,21 @@ a {
 .peek-sidebar a[aria-current="page"] {
   color: #ffffff !important;
 }
+
+
+.peek-dark-surface,
+.peek-dark-surface a,
+.peek-dark-surface p,
+.peek-dark-surface span,
+.peek-dark-surface h1,
+.peek-dark-surface h2,
+.peek-dark-surface h3,
+.peek-dark-surface h4,
+.peek-dark-surface strong,
+.peek-dark-surface svg {
+  color: #ffffff !important;
+}
+
+.peek-dark-surface svg {
+  stroke: currentColor;
+}

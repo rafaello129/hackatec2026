@@ -3,7 +3,7 @@ import { ArrowRight, Circle } from "lucide-react";
 import type { HomeTimelineItem } from "../hooks/useProxyHome";
 
 const sourceClass: Record<HomeTimelineItem["source"], string> = {
-  Emprendimientos: "bg-[#E6F3C8] text-[#42610A]",
+  "Mi comunidad": "bg-[#E6F3C8] text-[#42610A]",
   Pedidos: "bg-[#FFF0D8] text-[#8C6213]",
   Inventario: "bg-[#EEF2EA] text-[#607064]",
 };

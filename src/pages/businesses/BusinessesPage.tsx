@@ -38,7 +38,7 @@ export default function BusinessesPage() {
             Emprendimientos
           </h1>
           <p className="mt-2 text-[13px] text-[#657068]">
-            Administra los emprendimientos que representas y revisa su operación reciente.
+            Acompaña los emprendimientos de tu comunidad y da seguimiento a su operación diaria.
           </p>
         </div>
 

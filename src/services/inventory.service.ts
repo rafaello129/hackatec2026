@@ -94,7 +94,7 @@ export async function getInventoryKpis(itemsInput?: InventoryItem[]): Promise<In
       label: "Total productos",
       value: totalSku,
       formattedValue: String(totalSku),
-      hint: "Items de negocios intermediados",
+      hint: "Items de emprendimientos intermediados",
     },
     {
       id: "low_stock",
@@ -115,7 +115,7 @@ export async function getInventoryKpis(itemsInput?: InventoryItem[]): Promise<In
       label: "Liquidaciones",
       value: pendingPayouts,
       formattedValue: formatCurrency(pendingPayouts),
-      hint: "Pendientes por negocio",
+      hint: "Pendientes por emprendimiento",
     },
   ];
 }

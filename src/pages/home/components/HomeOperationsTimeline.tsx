@@ -20,7 +20,7 @@ export default function HomeOperationsTimeline({
       <div className="flex items-start justify-between gap-4">
         <div>
           <h2 className="text-base font-semibold text-[#17231B]">Actividad reciente</h2>
-          <p className="mt-1 text-[11px] text-[#87918A]">Movimientos recientes de emprendimientos, pedidos e inventario.</p>
+          <p className="mt-1 text-[11px] text-[#87918A]">Movimientos recientes de mi comunidad, pedidos e inventario.</p>
         </div>
         <Link to="/businesses" className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#287839]">
           Operación <ArrowRight className="h-3.5 w-3.5" />

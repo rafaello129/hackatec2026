@@ -20,7 +20,7 @@ export default function AssistantMessageList({
           <span className="grid h-7 w-7 place-items-center rounded-[10px] bg-[#EAF4E6] text-[#135C2F]">
             <Loader2 className="h-3.5 w-3.5 animate-spin" />
           </span>
-          Analizando señales del negocio...
+          Analizando señales del emprendimiento...
         </div>
       ) : null}
     </div>

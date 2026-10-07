@@ -59,7 +59,7 @@ export default function UrgentOrdersPanel({ orders, formatCurrency, formatDate }
         })}
         {orders.length === 0 && (
           <p className="rounded-[18px] bg-[#FAFAF7] p-4 text-[12px] text-[#68736B]">
-            No hay pedidos urgentes de negocios activos.
+            No hay pedidos urgentes de emprendimientos activos.
           </p>
         )}
       </div>

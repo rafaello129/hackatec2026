@@ -212,7 +212,7 @@ export function useProxyHome() {
     const payouts = businessKpis.find((kpi) => kpi.id === "pending_payouts")?.formattedValue ?? money.format(0);
 
     return [
-      { id: "active_businesses", label: "Emprendimientos activos", value: activeBusinesses, hint: "Representados en operacion", tone: "success" },
+      { id: "active_businesses", label: "Emprendimientos activos", value: activeBusinesses, hint: "Acompanados por el operador", tone: "success" },
       { id: "pending_orders", label: "Pedidos pendientes", value: pendingOrders, hint: "Por confirmar, preparar o entregar", tone: "warning" },
       { id: "managed_sales", label: "Ventas gestionadas", value: managedSales, hint: "Acumulado del mes", tone: "success" },
       { id: "pending_payouts", label: "Liquidaciones", value: payouts, hint: "Pendientes a emprendimientos", tone: "warning" },

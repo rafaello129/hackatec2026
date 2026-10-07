@@ -15,7 +15,7 @@ export default function BusinessActivityPanel({ activities }: { activities: Busi
     <section className="rounded-[22px] border border-[#E3E7DF] bg-white p-5">
       <div>
         <h2 className="text-[15px] font-semibold text-[#172019]">Actividad reciente</h2>
-        <p className="mt-1 text-[11px] text-[#7B867E]">Últimos movimientos del negocio seleccionado.</p>
+        <p className="mt-1 text-[11px] text-[#7B867E]">Últimos movimientos del emprendimiento seleccionado.</p>
       </div>
 
       <div className="mt-4 divide-y divide-[#EEF0EB]">

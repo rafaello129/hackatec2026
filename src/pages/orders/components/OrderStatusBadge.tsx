@@ -1,17 +1,16 @@
-import StatusBadge from "@/components/common/StatusBadge";
 import type { OrderStatus } from "@/types/order.types";
 
-const statusMap: Record<OrderStatus, { label: string; tone: "neutral" | "success" | "warning" | "danger" }> = {
-  new: { label: "Nuevo", tone: "warning" },
-  confirmed: { label: "Confirmado", tone: "neutral" },
-  preparing: { label: "En preparación", tone: "warning" },
-  ready_for_delivery: { label: "Listo para entrega", tone: "success" },
-  in_delivery: { label: "En reparto", tone: "success" },
-  delivered: { label: "Entregado", tone: "success" },
-  canceled: { label: "Cancelado", tone: "danger" },
+const statusMap: Record<OrderStatus, { label: string; className: string }> = {
+  new: { label: "Nuevo", className: "bg-[#FFF0D8] text-[#8C6213]" },
+  confirmed: { label: "Confirmado", className: "bg-[#EEF2EA] text-[#607064]" },
+  preparing: { label: "En preparación", className: "bg-[#FFF0D8] text-[#8C6213]" },
+  ready_for_delivery: { label: "Listo", className: "bg-[#E6F3C8] text-[#42610A]" },
+  in_delivery: { label: "En reparto", className: "bg-[#E6F3C8] text-[#42610A]" },
+  delivered: { label: "Entregado", className: "bg-[#E6F3C8] text-[#42610A]" },
+  canceled: { label: "Cancelado", className: "bg-[#FDE9E6] text-[#A54A42]" },
 };
 
 export default function OrderStatusBadge({ status }: { status: OrderStatus }) {
   const mapped = statusMap[status];
-  return <StatusBadge label={mapped.label} tone={mapped.tone} />;
+  return <span className={`inline-flex rounded-full px-2.5 py-1 text-[9px] font-semibold ${mapped.className}`}>{mapped.label}</span>;
 }

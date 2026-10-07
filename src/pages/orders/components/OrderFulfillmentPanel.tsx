@@ -25,29 +25,35 @@ export default function OrderFulfillmentPanel({ order }: { order: Order | null }
   if (!order) return null;
 
   return (
-    <section className="rounded-lg border border-[#c2c9bc] bg-white p-4">
-      <div className="mb-3 flex items-center justify-between gap-3">
-        <h2 className="font-['Hanken_Grotesk'] text-lg font-semibold text-[#1a1c18]">Preparación y entrega</h2>
+    <section className="rounded-[22px] border border-[#E3E7DF] bg-white p-5">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h2 className="text-[15px] font-semibold text-[#172019]">Preparación y entrega</h2>
+          <p className="mt-1 text-[11px] text-[#7B867E]">Seguimiento del pedido seleccionado.</p>
+        </div>
         <FulfillmentStatusBadge status={order.fulfillmentStatus} />
       </div>
-      <div className="space-y-3 text-sm">
-        <div className="rounded-lg border border-[#e2e3dc] bg-[#f9faf3] p-3">
-          <p className="flex items-center gap-2 font-semibold text-[#1a1c18]">
-            <Truck className="h-4 w-4 text-[#4F7302]" />
+
+      <div className="mt-4 space-y-3">
+        <div className="rounded-[16px] bg-[#F6F8F3] p-4">
+          <p className="flex items-center gap-2 text-[11px] font-semibold text-[#344039]">
+            <Truck className="h-4 w-4 text-[#287839]" />
             {deliveryLabels[order.deliveryMethod]}
           </p>
-          <p className="mt-1 text-[#42493f]">{order.deliveryAddress}</p>
+          <p className="mt-1.5 text-[10px] leading-4 text-[#7B867E]">{order.deliveryAddress}</p>
         </div>
-        <div className="rounded-lg border border-[#e2e3dc] bg-[#f9faf3] p-3">
-          <p className="flex items-center gap-2 font-semibold text-[#1a1c18]">
-            <CalendarClock className="h-4 w-4 text-[#4F7302]" />
+
+        <div className="rounded-[16px] bg-[#F6F8F3] p-4">
+          <p className="flex items-center gap-2 text-[11px] font-semibold text-[#344039]">
+            <CalendarClock className="h-4 w-4 text-[#287839]" />
             Entrega estimada
           </p>
-          <p className="mt-1 text-[#42493f]">{order.estimatedDeliveryDate} · límite {order.dueDate}</p>
+          <p className="mt-1.5 text-[10px] text-[#7B867E]">{order.estimatedDeliveryDate} · límite {order.dueDate}</p>
         </div>
-        <div className="rounded-lg border border-[#D6D979] bg-[#f9faf3] p-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.08em] text-[#3E5902]">Siguiente acción</p>
-          <p className="mt-1 font-semibold text-[#1a1c18]">{nextAction(order)}</p>
+
+        <div className="rounded-[14px] bg-[#ECF5E8] px-3 py-3 text-[10px] leading-4 text-[#3F6948]">
+          <p className="font-semibold uppercase tracking-[0.06em]">Siguiente acción</p>
+          <p className="mt-1 font-semibold text-[#2D5437]">{nextAction(order)}</p>
         </div>
       </div>
     </section>

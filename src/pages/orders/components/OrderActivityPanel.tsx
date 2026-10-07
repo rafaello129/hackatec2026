@@ -13,31 +13,33 @@ const iconMap: Record<OrderActivity["type"], typeof ClipboardList> = {
 
 export default function OrderActivityPanel({ activities }: { activities: OrderActivity[] }) {
   return (
-    <section className="rounded-lg border border-[#c2c9bc] bg-white p-4">
-      <div className="mb-3 flex items-center justify-between">
-        <h2 className="font-['Hanken_Grotesk'] text-lg font-semibold text-[#1a1c18]">Actividad reciente</h2>
-        <span className="rounded-full bg-[#e8e9e2] px-2.5 py-1 text-xs font-semibold text-[#42493f]">{activities.length}</span>
+    <article className="rounded-[22px] border border-[#E3E7DF] bg-white p-5">
+      <div>
+        <h2 className="text-[15px] font-semibold text-[#172019]">Actividad reciente</h2>
+        <p className="mt-1 text-[11px] text-[#7B867E]">Últimos movimientos del pedido o de la operación.</p>
       </div>
-      <div className="space-y-2.5">
-        {activities.map((activity) => {
+
+      <div className="mt-4 divide-y divide-[#EEF0EB]">
+        {activities.slice(0, 5).map((activity) => {
           const Icon = iconMap[activity.type];
+          const issue = activity.type === "issue_reported";
           return (
-            <article key={activity.id} className="flex gap-3 rounded-lg border border-[#e2e3dc] bg-[#f9faf3] p-3">
-              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-[#D6D979] text-[#3E5902]">
-                <Icon className="h-4 w-4" />
+            <article key={activity.id} className="flex gap-3 py-3 first:pt-0 last:pb-0">
+              <span className={issue ? "grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#FDE9E6] text-[#A54A42]" : "grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#E6F1E4] text-[#135C2F]"}>
+                <Icon className="h-3.5 w-3.5" />
               </span>
               <div className="min-w-0 flex-1">
-                <div className="flex items-start justify-between gap-3">
-                  <p className="line-clamp-1 text-sm font-semibold text-[#1a1c18]">{activity.title}</p>
-                  <span className="shrink-0 text-[11px] font-semibold text-[#73796e]">{activity.date}</span>
+                <div className="flex items-start justify-between gap-2">
+                  <p className="line-clamp-1 text-[11px] font-semibold text-[#2B352F]">{activity.title}</p>
+                  <span className="shrink-0 text-[9px] text-[#929C95]">{activity.date}</span>
                 </div>
-                <p className="mt-1 line-clamp-2 text-xs leading-5 text-[#42493f]">{activity.description}</p>
-                <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#73796e]">{activity.responsible}</p>
+                <p className="mt-1 line-clamp-2 text-[10px] leading-4 text-[#7B867E]">{activity.description}</p>
+                <p className="mt-1 text-[9px] font-medium uppercase tracking-[0.06em] text-[#929C95]">{activity.responsible}</p>
               </div>
             </article>
           );
         })}
       </div>
-    </section>
+    </article>
   );
 }

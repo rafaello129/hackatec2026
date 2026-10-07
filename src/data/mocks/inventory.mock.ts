@@ -172,7 +172,7 @@ export const inventoryItemsMock: InventoryItem[] = [
     name: "Maiz organico premium",
     sku: "AN-MAIZ-001",
     category: "raw_material",
-    description: "Insumo regional para emprendimientos de alimentos representados por el intermediario.",
+    description: "Insumo regional para emprendimientos de alimentos de la comunidad.",
     quantity: 1240,
     unit: "kg",
     minStock: 800,

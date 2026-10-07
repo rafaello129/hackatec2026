@@ -55,7 +55,7 @@ export interface HomeTimelineItem {
   title: string;
   description: string;
   date: string;
-  source: "Negocios" | "Pedidos" | "Inventario";
+  source: "Emprendimientos" | "Pedidos" | "Inventario";
 }
 
 const money = new Intl.NumberFormat("es-MX", { currency: "MXN", maximumFractionDigits: 0, style: "currency" });
@@ -212,10 +212,10 @@ export function useProxyHome() {
     const payouts = businessKpis.find((kpi) => kpi.id === "pending_payouts")?.formattedValue ?? money.format(0);
 
     return [
-      { id: "active_businesses", label: "Negocios activos", value: activeBusinesses, hint: "Representados en operacion", tone: "success" },
+      { id: "active_businesses", label: "Emprendimientos activos", value: activeBusinesses, hint: "Representados en operacion", tone: "success" },
       { id: "pending_orders", label: "Pedidos pendientes", value: pendingOrders, hint: "Por confirmar, preparar o entregar", tone: "warning" },
       { id: "managed_sales", label: "Ventas gestionadas", value: managedSales, hint: "Acumulado del mes", tone: "success" },
-      { id: "pending_payouts", label: "Liquidaciones", value: payouts, hint: "Pendientes a negocios", tone: "warning" },
+      { id: "pending_payouts", label: "Liquidaciones", value: payouts, hint: "Pendientes a emprendimientos", tone: "warning" },
       { id: "estimated_commission", label: "Comision estimada", value: money.format(estimatedCommission), hint: "Pedidos visibles del mes", tone: "neutral" },
     ];
   }, [businessKpis, estimatedCommission]);
@@ -231,8 +231,8 @@ export function useProxyHome() {
         title: attentionBusiness ? `Revisar ${attentionBusiness.name}` : "Priorizar seguimiento operativo",
         description: attentionBusiness
           ? `Tiene ${attentionBusiness.pendingOrders} pedidos pendientes y ${money.format(attentionBusiness.pendingPayout)} por liquidar.`
-          : "No hay negocios criticos, mantén revision diaria de pedidos y stock.",
-        action: "Ver negocios",
+          : "No hay emprendimientos criticos, mantén revision diaria de pedidos y stock.",
+        action: "Ver emprendimientos",
       },
       {
         id: "rec-002",
@@ -259,7 +259,7 @@ export function useProxyHome() {
       title: activity.title,
       description: activity.description,
       date: activity.date,
-      source: "Negocios" as const,
+      source: "Emprendimientos" as const,
     }));
 
     const orderItems = orderActivities

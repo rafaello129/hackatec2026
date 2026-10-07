@@ -46,7 +46,7 @@ function buildAssistantResponse(message: string) {
   const text = message.toLowerCase();
 
   if (text.includes("cliente") || text.includes("crm") || text.includes("churn")) {
-    return "En CRM detecto una prioridad: AgroNorte Distribution es cliente estrategico y no tiene contacto reciente. Sugiero agendar seguimiento ejecutivo y revisar una oferta de venta conjunta para aumentar retencion.";
+    return "En CRM detecto una prioridad: Milpa del Caribe es cliente estrategico y no tiene contacto reciente. Sugiero agendar seguimiento ejecutivo y revisar una oferta de venta conjunta para aumentar retencion.";
   }
 
   if (text.includes("inventario") || text.includes("stock") || text.includes("producto")) {
@@ -58,7 +58,7 @@ function buildAssistantResponse(message: string) {
   }
 
   if (text.includes("finanza") || text.includes("factura") || text.includes("ingreso") || text.includes("egreso")) {
-    return "Financieramente el periodo esta saludable, pero hay 2 facturas vencidas y 7 pendientes. Recomiendo priorizar BioPack Peninsula y separar costos de delivery por acuerdo cooperativo.";
+    return "Financieramente el periodo esta saludable, pero hay 2 facturas vencidas y 7 pendientes. Recomiendo priorizar EcoEmpaque Caribe y separar costos de delivery por acuerdo cooperativo.";
   }
 
   if (text.includes("campana") || text.includes("campaña")) {
@@ -92,7 +92,7 @@ export function runQuickAction(actionId: string): AssistantMessage {
   const action = assistantQuickActionsMock.find((item) => item.id === actionId);
 
   if (!action) {
-    return sendAssistantMessage("Dame una recomendacion general del negocio.");
+    return sendAssistantMessage("Dame una recomendacion general del emprendimiento.");
   }
 
   return {

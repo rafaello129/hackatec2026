@@ -19,9 +19,9 @@ import UrgentOrdersPanel from "./components/UrgentOrdersPanel";
 import { useProxyHome } from "./hooks/useProxyHome";
 
 const quickLinks = [
-  { label: "Ver negocios", to: "/businesses", icon: Building2, helper: "Gestiona negocios aliados" },
+  { label: "Ver emprendimientos", to: "/businesses", icon: Building2, helper: "Acompaña emprendimientos locales" },
   { label: "Ver pedidos", to: "/orders", icon: ClipboardList, helper: "Revisa pedidos y entregas" },
-  { label: "Ver productos", to: "/inventory", icon: Store, helper: "Controla stock por negocio" },
+  { label: "Ver productos", to: "/inventory", icon: Store, helper: "Controla stock por emprendimiento" },
   { label: "Ver mi dinero", to: "/finance/summary", icon: WalletCards, helper: "Ventas y liquidaciones" },
 ];
 
@@ -72,10 +72,10 @@ export default function HomePage() {
       <section className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h1 className="text-[34px] font-bold leading-tight text-[#17231B] sm:text-[40px]">
-            Panel del intermediario
+            Operador comunitario
           </h1>
           <p className="mt-1 text-sm text-[#68736B]">
-            Aquí tienes un resumen de la operación de tus negocios hoy
+            Resumen de la operación de los emprendimientos de tu comunidad
           </p>
         </div>
 
@@ -106,7 +106,7 @@ export default function HomePage() {
 
             <div className="min-w-0">
               <h2 className="text-[20px] font-black leading-none tracking-[0.045em] text-white">
-                Mantén cada negocio en movimiento
+                Mantén cada emprendimiento en movimiento
               </h2>
               <p className="mt-2 max-w-[760px] text-[14px] font-bold leading-[1.2] tracking-[0.025em] text-white">
                 Centraliza pedidos, inventario, ventas y liquidaciones para reaccionar antes de que una operación se detenga.
@@ -118,7 +118,7 @@ export default function HomePage() {
             to="/businesses"
             className="inline-flex shrink-0 items-center gap-2 self-start whitespace-nowrap text-[12px] font-bold uppercase tracking-[0.1em] text-white lg:self-center"
           >
-            Revisar negocios
+            Revisar emprendimientos
             <ArrowRight className="h-6 w-6" />
           </Link>
         </div>

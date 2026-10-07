@@ -8,7 +8,7 @@ export default function CriticalInventoryPanel({ items }: { items: CriticalInven
     <section className="rounded-[24px] border border-[#E2E6DF] bg-white p-6 sm:p-7">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h2 className="text-base font-semibold text-[#17231B]">Inventario crítico por emprendimiento</h2>
+          <h2 className="text-base font-semibold text-[#17231B]">Inventario crítico de mi comunidad</h2>
           <p className="mt-1 text-[11px] text-[#87918A]">Productos con riesgo de frenar pedidos o ventas.</p>
         </div>
         <Link to="/inventory" className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#287839]">

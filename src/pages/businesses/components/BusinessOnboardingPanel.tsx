@@ -20,7 +20,7 @@ export default function BusinessOnboardingPanel({ tasks }: { tasks: BusinessOnbo
     <section className="rounded-[22px] border border-[#E3E7DF] bg-white p-5">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <h2 className="text-[15px] font-semibold text-[#172019]">Onboarding y pendientes</h2>
+          <h2 className="text-[15px] font-semibold text-[#172019]">Incorporación y pendientes</h2>
           <p className="mt-1 text-[11px] text-[#7B867E]">{tasks.length} tareas en esta operación.</p>
         </div>
       </div>

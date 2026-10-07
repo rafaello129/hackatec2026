@@ -199,7 +199,7 @@ export const businessActivitiesMock: BusinessActivity[] = [
 ];
 
 export const businessOnboardingTasksMock: BusinessOnboardingTask[] = [
-  { id: "task-001", businessId: "biz-005", title: "Validar datos del propietario", completed: true, priority: "high" },
+  { id: "task-001", businessId: "biz-005", title: "Validar datos del responsable", completed: true, priority: "high" },
   { id: "task-002", businessId: "biz-005", title: "Subir catalogo inicial", completed: false, priority: "high" },
   { id: "task-003", businessId: "biz-005", title: "Confirmar politica de comision", completed: false, priority: "medium" },
   { id: "task-004", businessId: "biz-005", title: "Registrar cuenta para liquidacion", completed: false, priority: "high" },

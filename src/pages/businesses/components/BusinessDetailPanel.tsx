@@ -20,8 +20,8 @@ export default function BusinessDetailPanel({
   if (!business) {
     return (
       <section className="rounded-[22px] border border-[#E3E7DF] bg-white p-5">
-        <h3 className="text-[15px] font-semibold text-[#172019]">Detalle del negocio</h3>
-        <p className="mt-2 text-[11px] leading-5 text-[#7B867E]">Selecciona un negocio para revisar su operación.</p>
+        <h3 className="text-[15px] font-semibold text-[#172019]">Detalle del emprendimiento</h3>
+        <p className="mt-2 text-[11px] leading-5 text-[#7B867E]">Selecciona un emprendimiento para revisar su operación.</p>
       </section>
     );
   }

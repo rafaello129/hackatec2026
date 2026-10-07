@@ -25,7 +25,7 @@ type NavItem = {
 
 const primaryNav: NavItem[] = [
   { to: "/", label: "Inicio", icon: House },
-  { to: "/businesses", label: "Negocios", icon: BriefcaseBusiness },
+  { to: "/businesses", label: "Emprendimientos", icon: BriefcaseBusiness },
   { to: "/inventory", label: "Productos", icon: Package },
   { to: "/orders", label: "Pedidos", icon: ClipboardList },
   { to: "/finance", label: "Mi dinero", icon: WalletCards },
@@ -166,7 +166,7 @@ function Topbar({ onMenu }: { onMenu: () => void }) {
         <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#667068]" />
         <input
           type="search"
-          placeholder="Buscar negocios, productos o pedidos..."
+          placeholder="Buscar emprendimientos, productos o pedidos..."
           className="h-[44px] w-full rounded-full border-0 bg-[#F5F6F1] pl-11 pr-4 text-sm text-[#17231B] outline-none ring-1 ring-transparent transition focus:ring-[#9AC84B]"
         />
       </div>

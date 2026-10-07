@@ -19,7 +19,7 @@ import UrgentOrdersPanel from "./components/UrgentOrdersPanel";
 import { useProxyHome } from "./hooks/useProxyHome";
 
 const quickLinks = [
-  { label: "Ver mi comunidad", to: "/businesses", icon: Building2, helper: "Acompaña emprendimientos locales" },
+  { label: "Ver mi comunidad", to: "/businesses", icon: Building2, helper: "Acompaña a integrantes locales" },
   { label: "Ver pedidos", to: "/orders", icon: ClipboardList, helper: "Revisa pedidos y entregas" },
   { label: "Ver productos", to: "/inventory", icon: Store, helper: "Controla stock por emprendimiento" },
   { label: "Ver mi dinero", to: "/finance/summary", icon: WalletCards, helper: "Ventas y liquidaciones" },
@@ -75,7 +75,7 @@ export default function HomePage() {
             Operador comunitario
           </h1>
           <p className="mt-1 text-sm text-[#68736B]">
-            Resumen de la operación de los emprendimientos de tu comunidad
+            Resumen de la operación de los integrantes de tu comunidad
           </p>
         </div>
 
@@ -106,7 +106,7 @@ export default function HomePage() {
 
             <div className="min-w-0">
               <h2 className="text-[20px] font-black leading-none tracking-[0.045em] text-white">
-                Mantén cada emprendimiento en movimiento
+                Mantén tu comunidad en movimiento
               </h2>
               <p className="mt-2 max-w-[760px] text-[14px] font-bold leading-[1.2] tracking-[0.025em] text-white">
                 Centraliza pedidos, inventario, ventas y liquidaciones para reaccionar antes de que una operación se detenga.

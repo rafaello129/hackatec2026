@@ -46,7 +46,7 @@ export const assistantMessagesMock: AssistantMessage[] = [
     id: "msg-1004",
     role: "assistant",
     content:
-      "Primero priorizaria la cobranza vencida de BioPack Peninsula y, en paralelo, abriria compra conjunta de empaque. Esa combinacion libera flujo y evita que inventario limite acuerdos activos.",
+      "Primero priorizaria la cobranza vencida de EcoEmpaque Caribe y, en paralelo, abriria compra conjunta de empaque. Esa combinacion libera flujo y evita que inventario limite acuerdos activos.",
     createdAt: "2026-05-18T08:43:00",
     relatedModule: "finance",
     metadata: { source: "mock", confidence: 0.9 },
@@ -109,7 +109,7 @@ export const assistantInsightsMock: AssistantInsight[] = [
   {
     id: "ins-1001",
     title: "Cliente estrategico sin contacto reciente",
-    description: "AgroNorte Distribution no registra seguimiento reciente pese a mantener alto valor anual.",
+    description: "Milpa del Caribe no registra seguimiento reciente pese a mantener alto valor anual.",
     module: "customers",
     severity: "warning",
     actionLabel: "Programar seguimiento",
@@ -148,7 +148,7 @@ export const assistantRecommendationsMock: AssistantRecommendation[] = [
   {
     id: "rec-1001",
     title: "Activar compra conjunta de empaque",
-    description: "Consolidar demanda de BioPack Peninsula, Coop Granos del Caribe y almacen Cancun para reducir costo por volumen.",
+    description: "Consolidar demanda de EcoEmpaque Caribe, Coop Granos del Caribe y almacen Cancun para reducir costo por volumen.",
     module: "cooperatives",
     impact: "high",
     effort: "medium",
@@ -181,7 +181,7 @@ export const assistantRiskAlertsMock: AssistantRiskAlert[] = [
   {
     id: "risk-1001",
     title: "Factura vencida por campana compartida",
-    description: "BioPack Peninsula mantiene una factura vencida que puede retrasar nuevos acuerdos.",
+    description: "EcoEmpaque Caribe mantiene una factura vencida que puede retrasar nuevos acuerdos.",
     module: "finance",
     severity: "critical",
     detectedAt: "2026-05-18T09:05:00",

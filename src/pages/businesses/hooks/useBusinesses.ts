@@ -20,7 +20,7 @@ export type BusinessCategoryFilter = BusinessCategory | "all";
 export const businessStatusOptions: Array<{ value: BusinessStatusFilter; label: string }> = [
   { value: "all", label: "Todos los estados" },
   { value: "active", label: "Activo" },
-  { value: "onboarding", label: "En onboarding" },
+  { value: "onboarding", label: "En incorporación" },
   { value: "needs_attention", label: "Requiere atención" },
   { value: "paused", label: "Pausado" },
   { value: "inactive", label: "Inactivo" },

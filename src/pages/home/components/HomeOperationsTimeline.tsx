@@ -3,7 +3,7 @@ import { ArrowRight, Circle } from "lucide-react";
 import type { HomeTimelineItem } from "../hooks/useProxyHome";
 
 const sourceClass: Record<HomeTimelineItem["source"], string> = {
-  Negocios: "bg-[#E6F3C8] text-[#42610A]",
+  Emprendimientos: "bg-[#E6F3C8] text-[#42610A]",
   Pedidos: "bg-[#FFF0D8] text-[#8C6213]",
   Inventario: "bg-[#EEF2EA] text-[#607064]",
 };
@@ -20,7 +20,7 @@ export default function HomeOperationsTimeline({
       <div className="flex items-start justify-between gap-4">
         <div>
           <h2 className="text-base font-semibold text-[#17231B]">Actividad reciente</h2>
-          <p className="mt-1 text-[11px] text-[#87918A]">Movimientos recientes de negocios, pedidos e inventario.</p>
+          <p className="mt-1 text-[11px] text-[#87918A]">Movimientos recientes de emprendimientos, pedidos e inventario.</p>
         </div>
         <Link to="/businesses" className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#287839]">
           Operación <ArrowRight className="h-3.5 w-3.5" />

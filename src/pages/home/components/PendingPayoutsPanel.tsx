@@ -17,7 +17,7 @@ export default function PendingPayoutsPanel({
       <div className="flex items-start justify-between gap-4">
         <div>
           <h2 className="text-base font-semibold text-[#17231B]">Liquidaciones pendientes</h2>
-          <p className="mt-1 text-[11px] text-[#87918A]">Montos por liberar a emprendimientos representados.</p>
+          <p className="mt-1 text-[11px] text-[#87918A]">Montos por liberar a los emprendimientos de la comunidad.</p>
         </div>
         <Link to="/finance/summary" className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#287839]">
           Mi dinero <ArrowRight className="h-3.5 w-3.5" />

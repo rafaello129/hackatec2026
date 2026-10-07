@@ -43,3 +43,56 @@ h6 {
   font-family: "Hanken Grotesk", Inter, system-ui, sans-serif;
   letter-spacing: 0;
 }
+
+
+/* PÉEK application shell — aligned with the hackatec20254 layout system. */
+:root {
+  --peek-sidebar: #022601;
+  --peek-brand-900: #073b1e;
+  --peek-primary-light: #b6e251;
+  --peek-accent-lime: #9ac84b;
+  --peek-surface-soft: #e6f1e4;
+  --peek-surface-main: #fff9f8;
+  --peek-nav-active: #135c2f;
+  --peek-nav-divider: #285b39;
+}
+
+body {
+  background-color: var(--peek-sidebar);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+::selection {
+  background: #b6e251;
+  color: #073b1e;
+}
+
+.peek-sidebar,
+.peek-sidebar a,
+.peek-sidebar button,
+.peek-sidebar p,
+.peek-sidebar span,
+.peek-sidebar svg {
+  color: #ffffff !important;
+}
+
+.peek-sidebar svg {
+  stroke: currentColor;
+}
+
+.peek-sidebar button:disabled {
+  color: #ffffff !important;
+  opacity: 0.68;
+}
+
+.peek-sidebar a[aria-current="page"] {
+  color: #ffffff !important;
+}

@@ -35,10 +35,10 @@ export default function BusinessesPage() {
       <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="font-['Hanken_Grotesk'] text-[34px] font-bold leading-none text-[#172019]">
-            Emprendimientos
+            Mi comunidad
           </h1>
           <p className="mt-2 text-[13px] text-[#657068]">
-            Acompaña los emprendimientos de tu comunidad y da seguimiento a su operación diaria.
+            Acompaña a los integrantes de tu comunidad y da seguimiento a su operación diaria.
           </p>
         </div>
 
@@ -80,7 +80,7 @@ export default function BusinessesPage() {
                 <div>
                   <h2 className="text-[17px] font-semibold text-[#172019]">Mi comunidad</h2>
                   <p className="mt-1 text-[11px] text-[#7B867E]">
-                    {filteredBusinesses.length} {filteredBusinesses.length === 1 ? "emprendimiento" : "emprendimientos"}
+                    {filteredBusinesses.length} {filteredBusinesses.length === 1 ? "integrante" : "integrantes"}
                   </p>
                 </div>
               </div>
